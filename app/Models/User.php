@@ -27,6 +27,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'department_id',
+        'position_id',
+        'user_type_id',
+        'hash',
+        'firstname',
+        'middlename',
+        'lastname',
+        'suffix',
+        'is_active',
+        'modified_by',
     ];
 
     /**
@@ -62,4 +72,26 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // relationships
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'position_id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function user_type()
+    {
+        return $this->belongsTo(User::class, 'user_type_id');
+    }
+
+    public function user_role()
+    {
+        return $this->hasMany(UserRole::class,'user_id');
+    }
+
 }
