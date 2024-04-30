@@ -16,14 +16,14 @@
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tippy.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/litepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tiny-slider.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/themes/icewall/side-nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/themes/rubick/side-nav.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/leaflet.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/simplebar.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/components/mobile-menu.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}"> <!-- END: CSS Assets-->
 
     <!-- Scripts -->
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Styles -->
     @livewireStyles
 </head>
@@ -95,10 +95,9 @@
     <script src="{{ asset('dist/js/components/report-donut-chart-1.js') }}"></script>
     <script src="{{ asset('dist/js/components/simple-line-chart-1.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/tiny-slider.js') }}"></script>
-    <script src="{{ asset('dist/js/themes/icewall.js') }}"></script>
+    <script src="{{ asset('dist/js/themes/rubick.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/leaflet-map-loader.js') }}"></script>
     <script src="{{ asset('dist/js/components/mobile-menu.js') }}"></script>
-    {{-- <script src="{{ asset('dist/js/components/themes/icewall/top-bar.js') }}"></script>  --}}
     <script src="{{ asset('dist/js/components/themes/enigma/top-bar.js') }}"></script>
     <!-- END: Vendor JS Assets-->
 </body>
