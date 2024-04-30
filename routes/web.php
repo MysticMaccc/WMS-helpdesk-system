@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Pages\Request\RequestView;
+use App\Livewire\Pages\UserRole\UserRoleView;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,4 +21,9 @@ Route::middleware([
     Route::prefix('request')->as('request.')->group(function(){
         Route::get('index', RequestView::class)->name('index');
     });
+
+    Route::prefix('user-role')->as('user-role.')->group(function(){
+        Route::get('index', UserRoleView::class)->name('index');
+    });
+
 });
