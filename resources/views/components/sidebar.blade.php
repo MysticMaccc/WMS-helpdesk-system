@@ -18,6 +18,9 @@
             <x-sidebar-link-item label="Page 6" route="dashboard" />
         </x-nested-sidebar-item>
 
+        <x-nested-sidebar-item label="Request Maintenance" >
+            <x-sidebar-link-item label="Request Type" route="request-type.index" />
+        </x-nested-sidebar-item>
 
         <x-sidebar-link-item label="User Roles" route="user-role.index" />
 

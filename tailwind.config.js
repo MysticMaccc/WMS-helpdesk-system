@@ -33,7 +33,12 @@ const toRGB = (value) => {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./*.html","./src/**/*.{php,html,js,jsx,ts,tsx}"],
+    content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './vendor/laravel/jetstream/**/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+    ],
     darkMode: "class",
     theme: {
         extend: {
@@ -66,6 +71,7 @@ module.exports = {
             },
             fontFamily: {
                 roboto: ["Roboto"],
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             container: {
                 center: true,
@@ -95,6 +101,7 @@ module.exports = {
         },
     },
     plugins: [
+        forms, typography,
         require("@tailwindcss/forms"),
         plugin(function ({ addBase }) {
             addBase({
