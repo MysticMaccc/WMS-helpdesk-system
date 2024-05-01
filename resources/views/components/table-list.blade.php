@@ -1,6 +1,7 @@
 @props(['listTitle', 'headSlot', 'data','buttonSlot' => null])
 <div
-    class="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]">
+    class="col-span-1 md:col-span-9 lg:col-span-12 md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 
+    pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]">
     <h2 class="intro-y mt-10 text-lg font-medium">{{ $listTitle }}</h2>
     <div class="mt-5 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap">

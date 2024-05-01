@@ -13,8 +13,7 @@ class RequestTypeListComponent extends Component
 
     public function render()
     {
-        $requestTypeData = RequestType::where('is_active', true)->paginate(10);
-
+        $requestTypeData = RequestType::IsActive()->paginate(10);
         return view('livewire.components.request-type.request-type-list-component', compact('requestTypeData'));
     }
 

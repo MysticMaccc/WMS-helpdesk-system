@@ -27,6 +27,7 @@ Route::middleware([
     Route::prefix('request-type')->as('request-type.')->group(function(){
         Route::get('index', RequestTypeView::class)->name('index');
         Route::get('create', CreateRequestTypeView::class)->name('create');
+        Route::get('edit/{hash}', CreateRequestTypeView::class)->name('edit');
     });
 
     Route::prefix('user-role')->as('user-role.')->group(function(){
