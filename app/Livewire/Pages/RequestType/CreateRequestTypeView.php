@@ -2,14 +2,19 @@
 
 namespace App\Livewire\Pages\RequestType;
 
+use App\Models\Category;
+use App\Models\Department;
+use App\Models\RequestType;
+use App\ResourcesTrait;
+use Exception;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class CreateRequestTypeView extends Component
 {
-    public $title="Create Request Type";
-
+    use ResourcesTrait;
+    public $title = "Create Request Type";
     #[Validate([
         'department' => 'required',
         'category' => 'required',
@@ -18,15 +23,55 @@ class CreateRequestTypeView extends Component
     public $department;
     public $category;
     public $name;
-    
+    public $hash = null;
+
+    public function mount($hash = null)
+    {
+        if ($hash !== NULL) {
+            $this->hash = $hash;
+            $requestTypeData = RequestType::where('hash', $hash)->first();
+            $this->department = $requestTypeData->department_id;
+            $this->category = $requestTypeData->category_id;
+            $this->name = $requestTypeData->name;
+        }
+    }
+
     #[Layout('layouts.app')]
     public function render()
     {
-        return view('livewire.pages.request-type.create-request-type-view');
+        $departmentData = Department::where('is_active', 1)->get();
+        $categoryData = Category::where('is_active', 1)->get();
+
+        return view('livewire.pages.request-type.create-request-type-view', compact('departmentData', 'categoryData'));
     }
 
     public function store()
     {
         $this->validate();
+
+        $this->storeResource(RequestType::class, [
+            'department_id' => $this->department,
+            'category_id' => $this->category,
+            'name' => $this->name,
+        ]);
+
+        $this->reset();
+    }
+
+    public function update()
+    {
+        $this->validate();
+        $this->updateModel(RequestType::class, [
+            'department_id' => $this->department,
+            'category_id' => $this->category,
+            'name' => $this->name,
+        ]);
+
+        return $this->redirectRoute('request-type.index', navigate:true);
+    }
+
+    public function resetInput()
+    {
+        $this->reset();
     }
 }
