@@ -1,6 +1,6 @@
 <nav class="side-nav hidden w-[80px] overflow-x-hidden pb-16 pr-5 md:block xl:w-[230px]">
     <a class="flex items-center pt-4 pl-5 intro-x" href="">
-        <img class="w-6" src="dist/images/logo.svg" alt="Midone - Tailwind Admin Dashboard Template">
+        <img class="w-6" src="{{ asset('dist/images/logo.svg') }}" alt="Midone - Tailwind Admin Dashboard Template">
         <span class="hidden ml-3 text-lg text-white xl:block"> Rubick </span>
     </a>
     <div class="my-6 side-nav__divider"></div>

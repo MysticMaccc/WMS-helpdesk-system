@@ -79,7 +79,7 @@
                             A few more clicks to sign in to your account. Manage all your
                             e-commerce accounts in one place
                         </div>
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="" action="" wire:submit="logInAuthenticate">
                             @csrf
                             <div class="intro-x mt-8">
                                 <x-input data-tw-merge="" id="email" placeholder="Email" label="Email" wireModel="email"

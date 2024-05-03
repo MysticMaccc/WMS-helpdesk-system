@@ -14,7 +14,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
 
         <!-- Scripts -->
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Styles -->
         @livewireStyles
@@ -24,7 +24,6 @@
             {{ $slot }}
         </div>
 
-        @livewireScripts
         <!-- BEGIN: Vendor JS Assets-->
         <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>
         <script src="{{ asset('dist/js/vendors/tailwind-merge.js') }}"></script>
@@ -32,5 +31,6 @@
         <script src="{{ asset('dist/js/vendors/modal.js') }}"></script>
         <script src="{{ asset('dist/js/components/base/theme-color.js') }}"></script>
         <script src="{{ asset('dist/js/components/base/lucide.js') }}"></script> <!-- END: Vendor JS Assets-->
-    </body>
+        @livewireScripts
+    </body>             
 </html>
