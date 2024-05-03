@@ -35,7 +35,7 @@
         <div class="mobile-menu group top-0 inset-x-0 fixed bg-theme-1/90 z-[60] border-b border-white/[0.08] dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0 [&.mobile-menu--active]:before:visible [&.mobile-menu--active]:before:opacity-100">
             <div class="flex h-[70px] items-center px-3 sm:px-8">
                 <a class="mr-auto flex" href="">
-                    <img class="w-6" src="dist/images/logo.svg" alt="Midone - Tailwind Admin Dashboard Template">
+                    <img class="w-6" src="{{ asset('dist/images/logo.svg') }}" alt="Midone - Tailwind Admin Dashboard Template">
                 </a>
                 <a class="mobile-menu-toggler" href="#">
                     <i data-tw-merge="" data-lucide="bar-chart2" class="stroke-1.5 h-8 w-8 -rotate-90 transform text-white"></i>
@@ -55,8 +55,6 @@
             <!-- END: Side Menu -->
             <!-- BEGIN: Content -->
             <div class="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]">
-                <!-- BEGIN: Top Bar -->
-                <x-topbar />
                 {{ $slot }}
             </div>
             <!-- END: Content -->
@@ -98,7 +96,7 @@
     <script src="{{ asset('dist/js/themes/rubick.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/leaflet-map-loader.js') }}"></script>
     <script src="{{ asset('dist/js/components/mobile-menu.js') }}"></script>
-    <script src="{{ asset('dist/js/components/themes/enigma/top-bar.js') }}"></script>
+    <script src="{{ asset('dist/js/components/themes/rubick/top-bar.js') }}"></script>
     <!-- END: Vendor JS Assets-->
 </body>
 

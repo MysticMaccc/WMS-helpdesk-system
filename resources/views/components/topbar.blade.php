@@ -60,7 +60,7 @@
                     <div class="mb-5">
                         <a class="mt-2 flex items-center" href="">
                             <div class="image-fit h-8 w-8">
-                                <img class="rounded-full" src="dist/images/fakers/profile-8.jpg"
+                                <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-8.jpg') }}"
                                     alt="Midone - Tailwind Admin Dashboard Template">
                             </div>
                             <div class="ml-3">Nicolas Cage</div>
@@ -70,7 +70,7 @@
                         </a>
                         <a class="mt-2 flex items-center" href="">
                             <div class="image-fit h-8 w-8">
-                                <img class="rounded-full" src="dist/images/fakers/profile-6.jpg"
+                                <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-6.jpg') }}"
                                     alt="Midone - Tailwind Admin Dashboard Template">
                             </div>
                             <div class="ml-3">Edward Norton</div>
@@ -80,7 +80,7 @@
                         </a>
                         <a class="mt-2 flex items-center" href="">
                             <div class="image-fit h-8 w-8">
-                                <img class="rounded-full" src="dist/images/fakers/profile-14.jpg"
+                                <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-14.jpg') }}"
                                     alt="Midone - Tailwind Admin Dashboard Template">
                             </div>
                             <div class="ml-3">Johnny Depp</div>
@@ -90,7 +90,7 @@
                         </a>
                         <a class="mt-2 flex items-center" href="">
                             <div class="image-fit h-8 w-8">
-                                <img class="rounded-full" src="dist/images/fakers/profile-14.jpg"
+                                <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-14.jpg') }}"
                                     alt="Midone - Tailwind Admin Dashboard Template">
                             </div>
                             <div class="ml-3">Robert De Niro</div>
@@ -102,7 +102,7 @@
                     <div class="mb-2 font-medium">Products</div>
                     <a class="mt-2 flex items-center" href="">
                         <div class="image-fit h-8 w-8">
-                            <img class="rounded-full" src="dist/images/fakers/preview-4.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/preview-4.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                         </div>
                         <div class="ml-3">Nike Air Max 270</div>
@@ -112,7 +112,7 @@
                     </a>
                     <a class="mt-2 flex items-center" href="">
                         <div class="image-fit h-8 w-8">
-                            <img class="rounded-full" src="dist/images/fakers/preview-9.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/preview-9.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                         </div>
                         <div class="ml-3">Sony Master Series A9G</div>
@@ -122,7 +122,7 @@
                     </a>
                     <a class="mt-2 flex items-center" href="">
                         <div class="image-fit h-8 w-8">
-                            <img class="rounded-full" src="dist/images/fakers/preview-12.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/preview-12.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                         </div>
                         <div class="ml-3">Samsung Galaxy S20 Ultra</div>
@@ -132,7 +132,7 @@
                     </a>
                     <a class="mt-2 flex items-center" href="">
                         <div class="image-fit h-8 w-8">
-                            <img class="rounded-full" src="dist/images/fakers/preview-12.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/preview-12.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                         </div>
                         <div class="ml-3">Nike Air Max 270</div>
@@ -162,7 +162,7 @@
                     <div class="mb-5 font-medium">Notifications</div>
                     <div class="cursor-pointer relative flex items-center">
                         <div class="image-fit relative mr-1 h-12 w-12 flex-none">
-                            <img class="rounded-full" src="dist/images/fakers/profile-8.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-8.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                             <div
                                 class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-success dark:border-darkmode-600">
@@ -186,7 +186,7 @@
                     </div>
                     <div class="cursor-pointer relative flex items-center mt-5">
                         <div class="image-fit relative mr-1 h-12 w-12 flex-none">
-                            <img class="rounded-full" src="dist/images/fakers/profile-6.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-6.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                             <div
                                 class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-success dark:border-darkmode-600">
@@ -210,7 +210,7 @@
                     </div>
                     <div class="cursor-pointer relative flex items-center mt-5">
                         <div class="image-fit relative mr-1 h-12 w-12 flex-none">
-                            <img class="rounded-full" src="dist/images/fakers/profile-14.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-14.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                             <div
                                 class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-success dark:border-darkmode-600">
@@ -234,7 +234,7 @@
                     </div>
                     <div class="cursor-pointer relative flex items-center mt-5">
                         <div class="image-fit relative mr-1 h-12 w-12 flex-none">
-                            <img class="rounded-full" src="dist/images/fakers/profile-14.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-14.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                             <div
                                 class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-success dark:border-darkmode-600">
@@ -258,7 +258,7 @@
                     </div>
                     <div class="cursor-pointer relative flex items-center mt-5">
                         <div class="image-fit relative mr-1 h-12 w-12 flex-none">
-                            <img class="rounded-full" src="dist/images/fakers/profile-14.jpg"
+                            <img class="rounded-full" src="{{ asset('dist/images/fakers/profile-14.jpg') }}"
                                 alt="Midone - Tailwind Admin Dashboard Template">
                             <div
                                 class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-success dark:border-darkmode-600">
@@ -288,7 +288,7 @@
         <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><button
                 data-tw-toggle="dropdown" aria-expanded="false"
                 class="cursor-pointer image-fit zoom-in intro-x block h-8 w-8 overflow-hidden rounded-full shadow-lg"><img
-                    src="dist/images/fakers/profile-14.jpg" alt="Midone - Tailwind Admin Dashboard Template">
+                    src="{{ asset('dist/images/fakers/profile-14.jpg') }}" alt="Midone - Tailwind Admin Dashboard Template">
             </button>
             <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150"
                 data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
@@ -325,11 +325,17 @@
                         Help</a>
                     <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400 bg-white/[0.08]">
                     </div>
-                    <a
-                        class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item hover:bg-white/5"><i
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); 
+                            document.getElementById('logout-form').submit();
+                            document.cookie = 'data_privacy_accepted=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'"
+                            class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item hover:bg-white/5"><i
                             data-tw-merge="" data-lucide="toggle-right" class="stroke-1.5 mr-2 h-4 w-4"></i>
-                        Logout</a>
-                </div>
+                            Logout</a>
+                            <form id="logout-form" method="POST" action="{{ route('logout') }}">
+                                @csrf
+                            </form>
+                    </div>
             </div>
         </div>
         <!-- END: Account Menu -->

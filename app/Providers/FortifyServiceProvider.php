@@ -43,4 +43,9 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
     }
+
+    public function redirectTo()
+    {
+        return route('signin.index'); 
+    }
 }
