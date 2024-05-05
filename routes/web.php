@@ -4,7 +4,10 @@ use App\Livewire\Pages\Login\LogIn;
 use App\Livewire\Pages\Request\RequestView;
 use App\Livewire\Pages\RequestType\CreateRequestTypeView;
 use App\Livewire\Pages\RequestType\RequestTypeView;
+use App\Livewire\Pages\RequestTypeStatus\CreateRequestTypeStatusView;
+use App\Livewire\Pages\RequestTypeStatus\RequestTypeStatusView;
 use App\Livewire\Pages\UserRole\UserRoleView;
+use App\Models\RequestTypeStatus;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,6 +31,12 @@ Route::middleware(['WMSAuthentication'])->group(function () {
         Route::get('index', RequestTypeView::class)->name('index');
         Route::get('create', CreateRequestTypeView::class)->name('create');
         Route::get('edit/{hash}', CreateRequestTypeView::class)->name('edit');
+    });
+
+    Route::prefix('request-type-status')->as('request-type-status.')->group(function(){
+        Route::get('index', RequestTypeStatusView::class)->name('index');
+        Route::get('create', CreateRequestTypeStatusView::class)->name('create');
+        Route::get('edit/{hash}', CreateRequestTypeStatusView::class)->name('edit');
     });
 
     Route::prefix('user-role')->as('user-role.')->group(function(){
