@@ -18,6 +18,7 @@ class WmsAuthentication
     public function handle(Request $request, Closure $next): Response
     {
         if (session('Authenticated')) {
+            session()->regenerate();
             return $next($request);   
         }
 

@@ -21,7 +21,7 @@ trait ResourcesTrait
         }
     }
 
-    public function updateModel($modelClassName, array $attributes)
+    public function updateResource($modelClassName, array $attributes)
     {
         try {
             $instance = $modelClassName::where('hash', $this->hash)->first();
@@ -39,6 +39,24 @@ trait ResourcesTrait
             }
 
             session()->flash('success', 'Updating data successful!');
+        } catch (Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+    }
+
+    public function destroyResource($modelClassName, $hashValue)
+    {
+        try {
+            $destroy = $modelClassName::where('hash', '=',$hashValue)->first()->update([
+                'is_active' => 0
+            ]);
+
+            if (!$destroy) {
+                session()->flash('error', 'Deleting data failed!');
+                return;
+            }
+
+            session()->flash('success', 'Deleting data successful!');
         } catch (Exception $e) {
             session()->flash('error', $e->getMessage());
         }

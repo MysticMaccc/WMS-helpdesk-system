@@ -63,7 +63,7 @@
 
     @stack('modals')
 
-    @livewireScripts
+    @livewireScriptConfig
 
     <!-- BEGIN: Vendor JS Assets-->
     <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>
