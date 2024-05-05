@@ -31,6 +31,9 @@ class CreateRequestTypeView extends Component
         if ($hash !== NULL) {
             $this->hash = $hash;
             $requestTypeData = RequestType::where('hash', $hash)->first();
+            if(!$requestTypeData){
+                abort(404,'Data do not exist!');
+            }
             $this->department = $requestTypeData->department_id;
             $this->category = $requestTypeData->category_id;
             $this->name = $requestTypeData->name;
