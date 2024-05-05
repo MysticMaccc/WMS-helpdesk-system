@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\RequestType;
 use App\ResourcesTrait;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -52,16 +53,16 @@ class CreateRequestTypeView extends Component
         $this->storeResource(RequestType::class, [
             'department_id' => $this->department,
             'category_id' => $this->category,
-            'name' => $this->name,
+            'name' => $this->name
         ]);
 
-        $this->reset();
+        return $this->redirectRoute('request-type.index', navigate:true);
     }
 
     public function update()
     {
         $this->validate();
-        $this->updateModel(RequestType::class, [
+        $this->updateResource(RequestType::class, [
             'department_id' => $this->department,
             'category_id' => $this->category,
             'name' => $this->name,
@@ -70,8 +71,10 @@ class CreateRequestTypeView extends Component
         return $this->redirectRoute('request-type.index', navigate:true);
     }
 
-    public function resetInput()
+    public function destroy($hash)
     {
-        $this->reset();
+        $this->destroyResource(RequestType::class, $hash);
+        return $this->redirectRoute('request-type.index', navigate:true);
     }
+    
 }

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('request_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('department_id')->default(NULL);
-            $table->unsignedBigInteger('category_id')->default(NULL);
-            $table->text('hash')->default(NULL);
-            $table->text('name')->default(NULL);
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->text('hash')->nullable();
+            $table->text('name')->nullable();
             $table->boolean('is_active')->default(1);
-            $table->text('modified_by')->default(NULL);
+            $table->text('modified_by')->nullable();
             $table->timestamps();
 
             $table->foreign('department_id')->references('id')->on('departments');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('request_types');
+        Schema::dropIfExists('request_type');
     }
 };
