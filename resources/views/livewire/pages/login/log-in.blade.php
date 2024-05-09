@@ -1,6 +1,6 @@
 <section>
 
-        <div x-data="{modal: {{ $showModal }}}"
+        <div x-data="{modal: @json($showModal)}"
             class="p-3 sm:px-8 relative h-screen lg:overflow-hidden bg-primary xl:bg-white dark:bg-darkmode-800 xl:dark:bg-darkmode-600 before:hidden before:xl:block before:content-[''] before:w-[57%] before:-mt-[28%] before:-mb-[16%] before:-ml-[13%] before:absolute before:inset-y-0 before:left-0 before:transform before:rotate-[-4.5deg] before:bg-primary/20 before:rounded-[100%] before:dark:bg-darkmode-400 after:hidden after:xl:block after:content-[''] after:w-[57%] after:-mt-[20%] after:-mb-[13%] after:-ml-[13%] after:absolute after:inset-y-0 after:left-0 after:transform after:rotate-[-4.5deg] after:bg-primary after:rounded-[100%] after:dark:bg-darkmode-700">
             <div class="container relative z-10 sm:px-10">
                 <div class="block grid-cols-2 gap-4 xl:grid">
@@ -45,7 +45,7 @@
                                         <x-input data-tw-merge="" label="Email" wireModel="email" id="email" placeholder="Email" type="email"
                                             name="email" wire:model="email" required autofocus
                                             autocomplete="username" />
-                                        <x-input data-tw-merge="" label="Password" wireModel="password" placeholder="Password" id="password" type="password"
+                                        <x-input data-tw-merge=""  label="Password" wireModel="password" placeholder="Password" id="password" type="password"
                                             name="password" required wire:model="password"
                                             autocomplete="current-password" />
                                     </div>
@@ -65,8 +65,11 @@
                                         <x-button data-tw-merge="">
                                             {{ __('Log in') }}
                                         </x-button>
-                                        <a data-tw-merge="" href="{{ route('register') }}"
-                                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mt-3 w-full px-4 py-3 align-top xl:mt-0 xl:w-32">Register</a>
+                                        <a href="{{route('register')}}" class="inline-flex items-center px-4 py-2 rounded-md 
+                                        bg-gradient-to-r from-cyan-400 to-cyan-500 text-stone-50
+                                        hover:bg-gradien-to-r hover:from-cyan-600 hover:to-cyan-900 hover:text-stone-100
+                                        font-semibold text-xs uppercase tracking-widest focus:bg-gray-700 active:bg-gray-900 focus:outline-none 
+                                        focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Register</a>
                                     </div>
                                 </form>
 

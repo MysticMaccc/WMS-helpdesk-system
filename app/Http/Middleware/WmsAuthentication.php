@@ -17,12 +17,11 @@ class WmsAuthentication
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session('Authenticated')) {
+        if (session('Authenticated') && Auth::check()) {
             return $next($request);   
+        }else{
+            return redirect()->route('signin.index');
         }
-
-        return redirect()->route('signin.index');
-
         
     }
 }

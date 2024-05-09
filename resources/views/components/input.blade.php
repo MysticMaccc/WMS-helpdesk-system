@@ -1,7 +1,7 @@
 @props(['wireModel', 'label', 'disabled' => false])
 <div class="w-full">
     <label data-tw-merge="" 
-        class="inline-block mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right">
+        class="inline-block mb-2 mt-4 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right">
         {{ $label }}
     </label>
     <input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge([

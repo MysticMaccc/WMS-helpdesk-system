@@ -11,11 +11,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('signin')->as('signin.')->group(function(){
-    Route::get('index', LogIn::class)->name('index');
+Route::middleware('guest')->group(function () {
+    Route::prefix('signin')->as('signin.')->group(function(){
+        Route::get('index', LogIn::class)->name('index');
+    });
 });
 
-Route::middleware(['WMSAuthentication'])->group(function () {
+
+Route::middleware(['auth:sanctum','WMSAuthentication'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
