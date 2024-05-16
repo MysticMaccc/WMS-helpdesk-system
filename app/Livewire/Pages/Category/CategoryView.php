@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Livewire\Pages\RequestType;
+namespace App\Livewire\Pages\Category;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-class RequestTypeView extends Component
+class CategoryView extends Component
 {
-    public $title="Request Type Maintenance";
+    public $title="Category Maintenance";
     public $actionMessage = true;
 
     #[Layout('layouts.app')]
     public function render()
     {
-        return view('livewire.pages.request-type.request-type-view');
+        return view('livewire.pages.category.category-view');
     }
 
     public function destroyRequestMessage()

@@ -26,9 +26,10 @@ class LogIn extends Component
 
     #[Layout('layouts.guest')]
 
-    
-    public function logInAuthenticate() {
-    
+
+    public function logInAuthenticate()
+    {
+
         // Attempt to authenticate using Sanctum
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             $user = Auth::user();
@@ -43,10 +44,10 @@ class LogIn extends Component
             $this->addError('email', 'Invalid credentials.');
         }
     }
-    
+
     public function render()
     {
-        
+
         return view('livewire.pages.login.log-in');
     }
 }

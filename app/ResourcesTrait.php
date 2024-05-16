@@ -47,7 +47,7 @@ trait ResourcesTrait
     public function destroyResource($modelClassName, $hashValue)
     {
         try {
-            $destroy = $modelClassName::where('hash', '=',$hashValue)->first()->update([
+            $destroy = $modelClassName::where('hash', '=', $hashValue)->first()->update([
                 'is_active' => 0
             ]);
 
