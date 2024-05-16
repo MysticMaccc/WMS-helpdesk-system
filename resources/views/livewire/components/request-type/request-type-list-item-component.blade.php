@@ -7,6 +7,7 @@
 
             <x-dropdown>
                 <x-dropdown-link title="Edit" href="{{ route('request-type.edit', ['hash' => $data->hash]) }}" />
+                <x-dropdown-link title="Assign approvers" href="{{ route('request-type-approver.create', ['hash' => $data->hash]) }}" />
             </x-dropdown>
         </x-td>
     </tr>
