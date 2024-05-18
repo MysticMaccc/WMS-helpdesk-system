@@ -6,7 +6,7 @@ use Exception;
 
 trait ResourcesTrait
 {
-    public function storeResource($modelClassName, array $attributes)
+    public function storeResource($modelClassName, array $attributes, $exceptionMsg = null)
     {
         try {
             $store = $modelClassName::create($attributes);
@@ -17,7 +17,7 @@ trait ResourcesTrait
 
             session()->flash('success', 'Saving request type successful!');
         } catch (Exception $e) {
-            session()->flash('error', $e->getMessage());
+            session()->flash('error', $exceptionMsg != null ? $exceptionMsg:$e->getMessage());
         }
     }
 
@@ -47,7 +47,7 @@ trait ResourcesTrait
     public function destroyResource($modelClassName, $hashValue)
     {
         try {
-            $destroy = $modelClassName::where('hash', '=',$hashValue)->first()->update([
+            $destroy = $modelClassName::where('hash', '=', $hashValue)->first()->update([
                 'is_active' => 0
             ]);
 

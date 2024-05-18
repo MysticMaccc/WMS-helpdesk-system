@@ -35,6 +35,6 @@ class RequestTypeStatus extends Model
 
     public function request_type_approver()
     {
-        return $this->hasOne(RequestTypeApprover::class, 'request_type_status_id');
+        return $this->hasMany(RequestTypeApprover::class, 'request_type_status_id');
     }
 }

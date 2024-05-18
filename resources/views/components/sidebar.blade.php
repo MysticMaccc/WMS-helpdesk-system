@@ -12,13 +12,14 @@
             <x-sidebar-link-item label="Page 3" route="dashboard" />
         </x-nested-sidebar-item>
 
-        <x-nested-sidebar-item label="Request Form" >
+        <x-nested-sidebar-item label="Request Form">
             <x-sidebar-link-item label="Page 4" route="dashboard" />
             <x-sidebar-link-item label="Page 5" route="dashboard" />
             <x-sidebar-link-item label="Page 6" route="dashboard" />
         </x-nested-sidebar-item>
 
-        <x-nested-sidebar-item label="Request Maintenance" >
+        <x-nested-sidebar-item label="Request Maintenance">
+            <x-sidebar-link-item label="Category" route="category.index" />
             <x-sidebar-link-item label="Request Type" route="request-type.index" />
             <x-sidebar-link-item label="Request Type Status" route="request-type-status.index" />
         </x-nested-sidebar-item>

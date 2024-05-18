@@ -17,8 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       $this->call([
-        RequestTypeStatusSeeder::class,
-       ]);
+        $this->call([
+            RequestTypeStatusSeeder::class,
+            DepartmentSeeder::class,
+            UserRoleSeeder::class,
+            CategorySeeder::class,
+            UserSeeder::class
+        ]);
     }
+    
 }

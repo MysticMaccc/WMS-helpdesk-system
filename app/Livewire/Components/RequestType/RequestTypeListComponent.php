@@ -19,6 +19,7 @@ class RequestTypeListComponent extends Component
 
     public function create()
     {
+        // dd('test');
         return $this->redirectRoute('request-type.create', navigate:true);
     }
 }

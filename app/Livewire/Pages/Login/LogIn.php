@@ -59,10 +59,9 @@ class LogIn extends Component
             $this->addError('invalidCredentials', 'Oops.. Credentials not found on our end.');
         }
     }
-    
+
     public function render()
     {
-        Auth::user() == null;
         return view('livewire.pages.login.log-in');
     }
 }
