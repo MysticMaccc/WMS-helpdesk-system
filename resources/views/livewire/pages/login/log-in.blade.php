@@ -1,6 +1,5 @@
 <section>
-
-        <div x-data="{modal: @json($showModal)}"
+        <div
             class="p-3 sm:px-8 relative h-screen lg:overflow-hidden bg-primary xl:bg-white dark:bg-darkmode-800 xl:dark:bg-darkmode-600 before:hidden before:xl:block before:content-[''] before:w-[57%] before:-mt-[28%] before:-mb-[16%] before:-ml-[13%] before:absolute before:inset-y-0 before:left-0 before:transform before:rotate-[-4.5deg] before:bg-primary/20 before:rounded-[100%] before:dark:bg-darkmode-400 after:hidden after:xl:block after:content-[''] after:w-[57%] after:-mt-[20%] after:-mb-[13%] after:-ml-[13%] after:absolute after:inset-y-0 after:left-0 after:transform after:rotate-[-4.5deg] after:bg-primary after:rounded-[100%] after:dark:bg-darkmode-700">
             <div class="container relative z-10 sm:px-10">
                 <div class="block grid-cols-2 gap-4 xl:grid">
@@ -33,15 +32,23 @@
                             <x-slot name="logo">
                                 <x-authentication-card-logo />
                             </x-slot>
-
-                            <div class="intro-x text-slate-400 text-danger">
+                            
+                            <div class="intro-x text-slate-400">
                                 A few more clicks to sign in to your account. Manage all your
                                 e-commerce accounts in one place
                             </div>
                             {{-- <form method="POST" action="{{ route('login') }}"> --}}
                                 <form wire:submit.prevent="logInAuthenticate">
+                                    
                                     @csrf
-                                    <div class="intro-x mt-8">
+                                    <div class="flex">
+                                        @error('invalidCredentials')
+                                        <span class="text-red-700 text-md mt-5 font-bold font-mono">
+                                            {{$message}}
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="intro-x mt-1">
                                         <x-input data-tw-merge="" label="Email" wireModel="email" id="email" placeholder="Email" type="email"
                                             name="email" wire:model="email" required autofocus
                                             autocomplete="username" />
@@ -62,20 +69,39 @@
                                         <a href="">Forgot Password?</a>
                                     </div>
                                     <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
-                                        <x-button data-tw-merge="">
-                                            {{ __('Log in') }}
-                                        </x-button>
-                                        <a href="{{route('register')}}" class="inline-flex items-center px-4 py-2 rounded-md 
-                                        bg-gradient-to-r from-cyan-400 to-cyan-500 text-stone-50
-                                        hover:bg-gradien-to-r hover:from-cyan-600 hover:to-cyan-900 hover:text-stone-100
-                                        font-semibold text-xs uppercase tracking-widest focus:bg-gray-700 active:bg-gray-900 focus:outline-none 
-                                        focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Register</a>
+                                        <div class="text-center inline-block">
+                                            <button type="submit" data-tw-merge class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center hover:scale-110 hover:drop-shadow-md hover:font-lg disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary">Log In</button>
+
+                                            <a href="{{route('register')}}" class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 hover:scale-110 hover:drop-shadow-md hover:font-lg [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary">Register</a>
+                                        </div>                                        
                                     </div>
                                 </form>
 
-                                <div x-show="modal">
-                                    <x-modal />
-                                </div>
+                                @if ($showModal)
+                                    <div data-tw-backdrop="static" aria-hidden="{{$showModal}}" tabindex="-1" id="basic-modal-preview" class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s] @if ($showModal) overflow-y-auto show @endif " @if ($showModal)
+                                    style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;" @endif>
+                                        
+                                        <div data-tw-merge class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-96 group-[.show]:mt-96 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px] text-center">
+                                            <div class="flex flex-col">
+                                                <div class="items-center justify-center">
+                                                    <div class="text-lg font-bold rounded py-2 border-b bg-gray-300">Enter an OTP:</div>
+                                                    <div class="justify-center mt-3">
+                                                        <input type="text" wire:model='enteredOTP' name="" autofocus id="" class="rounded-2xl border-solid border-border-2 text-center border-indigo-600 @error('OTP') border-2 border-rose-600 @enderror" placeholder="e.g. 123456">
+                                                        
+                                                    </div>
+                                                    <div>
+                                                        @error('OTP')
+                                                        <span class="text-red-700 font-bold">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                    <div>
+                                                        <button wire:click="submitOTP" class="bg-indigo-700 text-white px-2 py-2 rounded-md m-2 hover:bg-indigo-800 active:bg-indigo-900">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <div
                                     class="intro-x mt-10 text-center text-slate-600 dark:text-slate-500 xl:mt-24 xl:text-left">

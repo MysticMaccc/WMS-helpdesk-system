@@ -19,9 +19,9 @@ class WmsAuthentication
     {
         if (session('Authenticated') && Auth::check()) {
             return $next($request);   
-        }else{
-            return redirect()->route('signin.index');
         }
+
+        return redirect()->route('login');
         
     }
 }

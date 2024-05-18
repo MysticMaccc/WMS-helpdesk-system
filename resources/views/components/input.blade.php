@@ -15,6 +15,6 @@
               group-[.input-group]:z-10 rounded-full',
     ]) !!}>
     @error($wireModel)
-        <p class="text-sm text-red-800">{{ $message }}</p>
+        <p class="text-sm text-red-800 font-mono">{{ $message }}</p>
     @enderror
 </div>

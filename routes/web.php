@@ -15,9 +15,12 @@ Route::get('/', function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::prefix('signin')->as('signin.')->group(function(){
-        Route::get('index', LogIn::class)->name('index');
-    });
+    // Route::prefix('signin')->as('signin.')->group(function(){
+    //     Route::get('index', LogIn::class)->name('index');
+    // });
+
+    Route::get('login', LogIn::class)->name('login');
+
 });
 
 

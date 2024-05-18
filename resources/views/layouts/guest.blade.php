@@ -14,7 +14,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css'])
 
         <!-- Styles -->
         @livewireStyles
@@ -31,6 +31,7 @@
         <script src="{{ asset('dist/js/vendors/modal.js') }}"></script>
         <script src="{{ asset('dist/js/components/base/theme-color.js') }}"></script>
         <script src="{{ asset('dist/js/components/base/lucide.js') }}"></script> <!-- END: Vendor JS Assets-->
+        @include('layouts.scripts.scripts')
         @livewireScripts
     </body>             
 </html>
