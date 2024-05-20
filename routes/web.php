@@ -2,6 +2,8 @@
 
 use App\Livewire\Pages\Category\CategoryView;
 use App\Livewire\Pages\Category\CreateCategoryView;
+use App\Livewire\Pages\Department\CreateDepartmentView;
+use App\Livewire\Pages\Department\DepartmentView;
 use App\Livewire\Pages\Login\LogIn;
 use App\Livewire\Pages\Request\CreateRequestView;
 use App\Livewire\Pages\Request\RequestView;
@@ -23,7 +25,6 @@ Route::middleware('guest')->group(function () {
     // });
 
     Route::get('login', LogIn::class)->name('login');
-
 });
 
 
@@ -64,5 +65,10 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
 
     Route::prefix('user-role')->as('user-role.')->group(function () {
         Route::get('index', UserRoleView::class)->name('index');
+    });
+
+    Route::prefix('department')->as('department.')->group(function () {
+        Route::get('index', DepartmentView::class)->name('index');
+        Route::get('create', CreateDepartmentView::class)->name('create');
     });
 });

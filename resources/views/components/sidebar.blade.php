@@ -22,5 +22,7 @@
 
         <x-sidebar-link-item label="User Roles" route="user-role.index" />
 
+        <x-sidebar-link-item label="Deparment" route="department.index" />
+
     </ul>
 </nav>
