@@ -1,4 +1,4 @@
-<x-main-layout :title="$title">
+<x-main-layout :title="$title" >
 
     <div class="col-span-1 md:col-span-9 lg:col-span-12" x-data="{ requestMessage: $wire.actionMessage }">
         <div x-show="requestMessage">

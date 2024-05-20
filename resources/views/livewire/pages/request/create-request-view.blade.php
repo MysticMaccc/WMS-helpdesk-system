@@ -20,7 +20,7 @@
             </x-slot:form>
 
             <x-slot:actions>
-                <x-button type="submit">{{ $hash !== null ? 'Update' : 'Create Request' }}</x-button>
+                <x-button type="submit">{{ $hash !== null ? 'Approve' : 'Create Request' }}</x-button>
             </x-slot:actions>
 
             <x-anchor title="Go back" href="{{ route('request.index') }}" wire:navigate />
