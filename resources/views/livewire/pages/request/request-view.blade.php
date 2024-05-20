@@ -1,15 +1,11 @@
-<section>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Test
-        </h2>
-    </x-slot>
+<x-main-layout :title="$title" >
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-welcome />
-            </div>
+    <div class="col-span-1 md:col-span-9 lg:col-span-12" x-data="{ requestMessage: $wire.actionMessage }">
+        <div x-show="requestMessage">
+            <x-action-message x-on:click="$wire.destroyRequestMessage()" />
         </div>
     </div>
-</section>
+
+    <livewire:components.request.request-list-component />
+    
+</x-main-layout>
