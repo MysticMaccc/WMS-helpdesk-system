@@ -13,6 +13,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
 
     <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="{{ asset('dist/css/vendors/toastify.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/vendors/highlight.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tippy.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/litepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tiny-slider.css') }}">
@@ -23,7 +25,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}"> <!-- END: CSS Assets-->
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
     <!-- Styles -->
     @livewireStyles
 </head>
@@ -68,8 +70,11 @@
     <!-- BEGIN: Vendor JS Assets-->
     <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/tailwind-merge.js') }}"></script>
-    <script src="{{ asset('dist/js/vendors/lucide.js') }}"></script>
+    <script src="{{ asset('dist/js/vendors/toastify.js') }}"></script>
+    <script src="{{ asset('dist/js/utils/helper.js') }}"></script>
+    <script src="{{ asset('dist/js/vendors/highlight.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/tippy.js') }}"></script>
+    <script src="{{ asset('dist/js/vendors/lucide.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/dayjs.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/litepicker.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/popper.js') }}"></script>
@@ -79,10 +84,12 @@
     <script src="{{ asset('dist/js/vendors/chartjs.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/leaflet-map.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/axios.js') }}"></script>
+    <script src="{{ asset('dist/js/pages/notification.js') }}"></script>
     <script src="{{ asset('dist/js/utils/colors.js') }}"></script>
-    <script src="{{ asset('dist/js/utils/helper.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/simplebar.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/modal.js') }}"></script>
+    <script src="{{ asset('dist/js/pages/modal.js') }}"></script>
+    <script src="{{ asset('dist/js/components/base/source.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/theme-color.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/lucide.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/tippy.js') }}"></script>
@@ -97,6 +104,8 @@
     <script src="{{ asset('dist/js/components/base/leaflet-map-loader.js') }}"></script>
     <script src="{{ asset('dist/js/components/mobile-menu.js') }}"></script>
     <script src="{{ asset('dist/js/components/themes/rubick/top-bar.js') }}"></script>
+    <script src="{{ asset('dist/js/components/base/preview-component.js') }}"></script>
+
     <!-- END: Vendor JS Assets-->
 </body>
 

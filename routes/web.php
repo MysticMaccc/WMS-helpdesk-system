@@ -3,6 +3,7 @@
 use App\Livewire\Pages\Category\CategoryView;
 use App\Livewire\Pages\Category\CreateCategoryView;
 use App\Livewire\Pages\Login\LogIn;
+use App\Livewire\Pages\Position\Position;
 use App\Livewire\Pages\Request\RequestView;
 use App\Livewire\Pages\RequestType\CreateRequestTypeView;
 use App\Livewire\Pages\RequestType\RequestTypeView;
@@ -33,6 +34,10 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
 
     Route::prefix('request')->as('request.')->group(function () {
         Route::get('index', RequestView::class)->name('index');
+    });
+
+    Route::prefix('position')->as('position.')->group(function () {
+        Route::get('index', Position::class)->name('index');
     });
 
     Route::prefix('request-type')->as('request-type.')->group(function () {

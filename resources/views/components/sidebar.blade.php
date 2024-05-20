@@ -24,6 +24,10 @@
             <x-sidebar-link-item label="Request Type Status" route="request-type-status.index" />
         </x-nested-sidebar-item>
 
+        <x-nested-sidebar-item label="Maintenance">
+            <x-sidebar-link-item label="Position Maintenance" route="position.index" />
+        </x-nested-sidebar-item>
+
         <x-sidebar-link-item label="User Roles" route="user-role.index" />
 
     </ul>
