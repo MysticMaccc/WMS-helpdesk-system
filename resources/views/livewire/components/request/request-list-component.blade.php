@@ -19,8 +19,8 @@
         <x-th>Department</x-th>
         <x-th>Details</x-th>
         <x-th>Cost</x-th>
-        <x-th>Created Date</x-th>
         <x-th>Status</x-th>
+        <x-th>History</x-th>
         <x-th>Action</x-th>
     </x-slot:headSlot>
 

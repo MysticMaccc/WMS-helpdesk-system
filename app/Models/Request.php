@@ -56,6 +56,11 @@ class Request extends Model
         return $this->belongsTo(Department::class,'department_id','id');
     }
 
+    public function request_update_log()
+    {
+        return $this->hasMany(RequestUpdateLog::class,'request_id');
+    }
+
     // ACCESSOR
 
 }

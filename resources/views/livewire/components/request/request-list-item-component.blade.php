@@ -9,6 +9,12 @@
     <x-td>{{ $data->created_at }}</x-td>
     <x-td>{{ $data->status->name }}</x-td>
     <x-td>
-        <x-button x-on:click="$wire.show('{{ $data->hash }}')" >View</x-button>
+        <p class="text-xs">Created By: {{ $data->modified_by }}, {{ $data->created_at }}</p>
+        @foreach ($data->request_update_log as $item)
+            <p class="text-xs">{{ $item->status->name }} By: {{ $item->modified_by }}, {{ $item->created_at }}</p>
+        @endforeach
+    </x-td>
+    <x-td>
+        <x-button x-on:click="$wire.show('{{ $data->hash }}')">View</x-button>
     </x-td>
 </tr>

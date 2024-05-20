@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
-class RequestTypeStatus extends Model
+class RequestUpdateLog extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'hash', 'name', 'is_active', 'modified_by'
+        'hash',
+        'request_id',
+        'status_id',
+        'modified_by'
     ];
 
     protected static function boot()
@@ -19,27 +23,22 @@ class RequestTypeStatus extends Model
             $lastId = $model::orderBy('id', 'DESC')->first();
             $hash_id = $lastId != NULL ? encrypt($lastId->id + 1) : encrypt(1);
             $model->hash = $hash_id;
-            $model->modified_by = 'system';
+            $model->modified_by = Auth::user()->full_name;
         });
 
         static::updating(function ($model) {
-            $model->modified_by = 'system';
+            $model->modified_by = Auth::user()->full_name;
         });
     }
 
-    // relationship
+    // relationships
     public function request()
     {
-        return $this->hasMany(Request::class, 'status_id');
+        return $this->belongsTo(Request::class,'request_id');
     }
 
-    public function request_type_approver()
+    public function status()
     {
-        return $this->belongsTo(RequestTypeApprover::class, 'request_type_status_id');
-    }
-
-    public function request_update_log()
-    {
-        return $this->hasMany(RequestUpdateLog::class,'status_id');
+        return $this->belongsTo(RequestTypeStatus::class,'status_id');
     }
 }

@@ -5,9 +5,11 @@ namespace App\Livewire\Pages\Request;
 use App\Models\Request;
 use App\Models\RequestType;
 use App\Models\RequestTypeApprover;
+use App\Models\RequestUpdateLog;
 use App\ResourcesTrait;
 use App\UtilitiesTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -20,6 +22,8 @@ class CreateRequestView extends Component
     public $subTitle = "Request Form";
     public $description = "Here you can create your request.";
     public $hash;
+    public $nextStatusData;
+    public $requestData;
     #[Validate([
         'requestType' => 'required',
         'details' => 'required|min:10|max:500',
@@ -33,16 +37,22 @@ class CreateRequestView extends Component
     {
         if ($hash != null) {
             $this->hash = $hash;
-            $requestData = Request::where('hash', $this->hash)->where('is_active', true)->first();
-            if (!$requestData) {
+            $this->requestData = Request::where('hash', $this->hash)->where('is_active', true)->first();
+            if (!$this->requestData) {
                 abort(404);
             }
+            //properties for updating
+            $this->nextStatusData = $this->requestData->request_type->request_type_approver
+                ->where('request_type_status_id', '>', $this->requestData->status_id)->first();
+            //end of properties for updating
+            // dd($this->nextStatusData->request_type_status->id);
+
             $this->subTitle = "Reference No.";
-            $this->description =  $requestData->reference_number;
-            $this->title = $requestData->status->name;
-            $this->requestType = $requestData->request_type_id;
-            $this->details = $requestData->details;
-            $this->cost = $requestData->cost;
+            $this->description =  $this->requestData->reference_number;
+            $this->title = $this->requestData->status->name;
+            $this->requestType = $this->requestData->request_type_id;
+            $this->details = $this->requestData->details;
+            $this->cost = $this->requestData->cost;
         }
     }
 
@@ -81,5 +91,24 @@ class CreateRequestView extends Component
 
     public function update()
     {
+        $transaction = DB::transaction(function () {
+            $requestLogAttributes = [
+                'request_id' => $this->requestData->id,
+                'status_id' => $this->requestData->status_id,
+            ];
+
+            $requestAttributes = [
+                'status_id' => $this->nextStatusData->request_type_status->id
+            ];
+            $this->storeResource(RequestUpdateLog::class, $requestLogAttributes);
+            $this->updateResource(Request::class, $requestAttributes);
+        });
+
+        if (!$transaction) {
+            session()->flash('error', 'Updating request failed!');
+        }
+
+        session()->flash('success', 'Request updated successfully!');
+        return $this->redirectRoute('request.index', navigate: true);
     }
 }
