@@ -30,7 +30,7 @@ class RequestTypeStatus extends Model
     // relationship
     public function request()
     {
-        return $this->hasOne(Request::class, 'status_id');
+        return $this->hasMany(Request::class, 'status_id');
     }
 
     public function request_type_approver()

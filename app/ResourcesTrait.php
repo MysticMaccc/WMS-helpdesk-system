@@ -12,10 +12,10 @@ trait ResourcesTrait
             $store = $modelClassName::create($attributes);
 
             if (!$store) {
-                session()->flash('error', 'Saving request type failed!');
+                session()->flash('error', 'Saving data failed!');
             }
 
-            session()->flash('success', 'Saving request type successful!');
+            session()->flash('success', 'Saving data successful!');
         } catch (Exception $e) {
             session()->flash('error', $exceptionMsg != null ? $exceptionMsg:$e->getMessage());
         }
