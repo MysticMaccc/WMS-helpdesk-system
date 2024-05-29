@@ -6,6 +6,7 @@ use App\Models\Request;
 use App\Models\RequestType;
 use App\Models\RequestTypeApprover;
 use App\Models\RequestUpdateLog;
+use App\Models\User;
 use App\ResourcesTrait;
 use App\UtilitiesTrait;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,7 @@ class CreateRequestView extends Component
     public $requestType;
     public $details;
     public $cost;
+    public $assignTo;
 
     public function mount($hash = null)
     {
@@ -63,8 +65,8 @@ class CreateRequestView extends Component
             ->where('is_active', true)
             ->whereHas('request_type_approver')
             ->get();
-
-        return view('livewire.pages.request.create-request-view', compact('requestTypeData'));
+        $userData = User::where('is_active', 1)->orderBy('firstname', 'asc')->get();
+        return view('livewire.pages.request.create-request-view', compact('requestTypeData', 'userData'));
     }
 
     public function store()
@@ -97,9 +99,20 @@ class CreateRequestView extends Component
                 'status_id' => $this->requestData->status_id,
             ];
 
-            $requestAttributes = [
-                'status_id' => $this->nextStatusData->request_type_status->id
-            ];
+            if ($this->requestData->status_id == 3) { //assign
+                $this->validate([
+                    'assignTo' => 'required',
+                ]);
+                $requestAttributes = [
+                    'status_id' => $this->nextStatusData->request_type_status->id,
+                    'assigned_user_id' => $this->assignTo,
+                ];
+            } else {
+                $requestAttributes = [
+                    'status_id' => $this->nextStatusData->request_type_status->id
+                ];
+            }
+
             $this->storeResource(RequestUpdateLog::class, $requestLogAttributes);
             $this->updateResource(Request::class, $requestAttributes);
         });

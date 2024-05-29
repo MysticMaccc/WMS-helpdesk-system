@@ -91,18 +91,22 @@ class User extends Authenticatable
 
     public function user_role()
     {
-        return $this->hasMany(UserRole::class,'user_id');
+        return $this->hasMany(UserRole::class, 'user_id');
     }
 
     public function request_type_approver()
     {
-        return $this->hasMany(RequestTypeApprover::class, 'user_id','id');
+        return $this->hasMany(RequestTypeApprover::class, 'user_id', 'id');
+    }
+
+    public function request_assigned_to()
+    {
+        return $this->hasMany(Request::class, 'assigned_user_id');
     }
 
     // accessor
     public function getFullNameAttribute()
     {
-        return $this->firstname." ".$this->middlename." ".$this->lastname;
+        return $this->firstname . " " . $this->middlename . " " . $this->lastname;
     }
-
 }
