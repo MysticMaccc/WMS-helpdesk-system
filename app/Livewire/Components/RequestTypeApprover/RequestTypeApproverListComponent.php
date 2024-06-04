@@ -11,6 +11,8 @@ class RequestTypeApproverListComponent extends Component
     use WithPagination;
     public $listTitle = "List of Approvers";
     public $requestTypeId;
+    public $requesttypestatus;
+    public $requesttypedata;
 
     public function render()
     {
