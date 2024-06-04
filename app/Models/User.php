@@ -109,4 +109,9 @@ class User extends Authenticatable
     {
         return $this->firstname . " " . $this->middlename . " " . $this->lastname;
     }
+
+    public function getNameAttribute()
+    {
+        return strtoupper($this->firstname) . " " . strtoupper($this->middlename) . " " . strtoupper($this->lastname);
+    }
 }

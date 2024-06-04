@@ -6,5 +6,5 @@
         </div>
     </div>
 
-    <livewire:components.category.category-list-component />
+    <livewire:components.department-maintenance.department-list-component />
 </x-main-layout>
