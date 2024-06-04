@@ -4,13 +4,8 @@
     <x-td>{{ $data->approver->full_name }}</x-td>
 
     <x-td>
-
-        {{-- <x-dropdown>
-            <x-dropdown-link title="Edit" href="{{ route('request-type.edit', ['hash' => $data->hash]) }}" />
-            <x-dropdown-link title="Assign approvers"
-                href="{{ route('request-type-approver.create', ['hash' => $data->hash]) }}" />
-        </x-dropdown> --}}
-        
+        <x-button wire:click="destroy('{{ $data->hash }}')"
+            wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE">Delete</x-button>
     </x-td>
 
 </tr>

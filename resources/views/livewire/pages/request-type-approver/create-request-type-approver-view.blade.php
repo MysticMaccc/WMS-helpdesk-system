@@ -39,7 +39,8 @@
     </div>
 
     <div class="col-span-1 md:col-start-6 md:col-span-4 lg:col-start-7 lg:col-span-6">
-        <livewire:components.request-type-approver.request-type-approver-list-component requestTypeId="{{ $requestTypeData->id }}" />
+        <livewire:components.request-type-approver.request-type-approver-list-component requestTypeId="{{ $requestTypeData->id }}" 
+        :requesttypedata="$requestTypeData" />
     </div>
 
 </x-main-layout>

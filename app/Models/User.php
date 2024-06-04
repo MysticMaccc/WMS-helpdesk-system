@@ -99,6 +99,11 @@ class User extends Authenticatable
         return $this->hasMany(RequestTypeApprover::class, 'user_id', 'id');
     }
 
+    public function request_assigned_to()
+    {
+        return $this->hasMany(Request::class, 'assigned_user_id');
+    }
+
     // accessor
     public function getFullNameAttribute()
     {
