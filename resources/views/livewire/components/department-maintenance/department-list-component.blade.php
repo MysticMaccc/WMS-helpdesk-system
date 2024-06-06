@@ -13,6 +13,7 @@
 
     <x-slot:headSlot>
         <x-th>Department</x-th>
+        <x-th>Full Name</x-th>
         <x-th>Modified By</x-th>
         <x-th>Created At</x-th>
         <x-th>Updated At</x-th>

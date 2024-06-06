@@ -114,4 +114,9 @@ class User extends Authenticatable
     {
         return strtoupper($this->firstname) . " " . strtoupper($this->middlename) . " " . strtoupper($this->lastname);
     }
+
+    public function assigned_department()
+    {
+        return $this->belongsTo(Department::class, 'user_id');
+    }
 }

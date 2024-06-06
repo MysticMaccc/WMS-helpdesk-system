@@ -18,6 +18,7 @@ class Department extends Model
             $lastId = $model::orderBy('id', 'DESC')->first();
             $hash_id = $lastId != NULL ? encrypt($lastId->id + 1) : encrypt(1);
             $model->hash = $hash_id;
+            $model->is_active = 1;
             $model->modified_by = 'system';
         });
 
@@ -29,6 +30,11 @@ class Department extends Model
     public function user()
     {
         return $this->hasMany(User::class, 'department_id');
+    }
+
+    public function assigned_user_department()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function request_type()
