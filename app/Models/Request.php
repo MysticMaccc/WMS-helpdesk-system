@@ -38,7 +38,7 @@ class Request extends Model
     // relationship
     public function attachment()
     {
-        return $this->hasMany(Attachment::class, 'request_id');
+        return $this->hasMany(Attachment::class, 'reference_number');
     }
 
     public function status()

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages\Request;
 
+use App\Models\Attachment;
 use App\Models\Request;
 use App\Models\RequestType;
 use App\Models\RequestTypeApprover;
@@ -14,11 +15,13 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class CreateRequestView extends Component
 {
     use UtilitiesTrait;
     use ResourcesTrait;
+    use WithFileUploads;
     public $title = "Create Request";
     public $subTitle = "Request Form";
     public $description = "Here you can create your request.";
@@ -29,11 +32,13 @@ class CreateRequestView extends Component
         'requestType' => 'required',
         'details' => 'required|min:10|max:500',
         'cost' => 'nullable|numeric',
+        'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf|max:2048',
     ])]
     public $requestType;
     public $details;
     public $cost;
     public $assignTo;
+    public $attachments = [];
 
     public function mount($hash = null)
     {
@@ -73,20 +78,37 @@ class CreateRequestView extends Component
     {
         $this->validate();
 
-        $statusId = RequestTypeApprover::where('request_type_id', $this->requestType)
-            ->where('level', 1)
-            ->first();
+        DB::transaction(
+            function () {
+                $statusId = RequestTypeApprover::where('request_type_id', $this->requestType)
+                    ->where('level', 1)
+                    ->first();
 
-        $attributes = [
-            'department_id' => Auth::user()->department_id,
-            'request_type_id' => $this->requestType,
-            'user_id' => Auth::user()->id,
-            'reference_number' => $this->generateReferenceNumber(),
-            'details' => $this->details,
-            'cost' => $this->cost,
-            'status_id' => $statusId->request_type_status_id
-        ];
-        $this->storeResource(Request::class, $attributes);
+                $referenceNumber = $this->generateReferenceNumber();
+
+                foreach ($this->attachments as $attachment) {
+                    $fileName = $attachment->hashName();
+                    $attachment->storeAs('public/attachments', $fileName);
+                    $this->storeResource(Attachment::class, [
+                        'reference_number' => $referenceNumber,
+                        'name' => $fileName,
+                        'filepath' => $fileName,
+                    ]);
+                }
+
+                $attributes = [
+                    'department_id' => Auth::user()->department_id,
+                    'request_type_id' => $this->requestType,
+                    'user_id' => Auth::user()->id,
+                    'reference_number' => $referenceNumber,
+                    'details' => $this->details,
+                    'cost' => $this->cost,
+                    'status_id' => $statusId->request_type_status_id
+                ];
+                $this->storeResource(Request::class, $attributes);
+            },
+            3
+        );
 
         return $this->redirectRoute('request.index', navigate: true);
     }
@@ -112,7 +134,7 @@ class CreateRequestView extends Component
                     'status_id' => $this->nextStatusData->request_type_status->id
                 ];
             }
-            
+
             $this->storeResource(RequestUpdateLog::class, $requestLogAttributes);
             $this->updateResource(Request::class, $requestAttributes);
         });

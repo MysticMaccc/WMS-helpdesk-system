@@ -1,11 +1,11 @@
 <x-main-layout :title="$title">
 
-    <div class="col-span-1 md:col-span-9 lg:col-span-12" x-data="{ requestMessage: $wire.actionMessage }">
-        <div x-show="requestMessage">
-            <x-action-message x-on:click="$wire.destroyRequestMessage()" />
-        </div>
+    <div x-data="{ requestMessage: $wire.actionMessage }">
+        <template x-if="requestMessage">
+            <x-action-message  />
+        </template>
     </div>
-
+    
     <div class="col-span-1 md:col-start-1 md:col-span-4 lg:col-start-1 lg:col-span-6">
         <x-form-section submit="store">
 
@@ -39,8 +39,8 @@
     </div>
 
     <div class="col-span-1 md:col-start-6 md:col-span-4 lg:col-start-7 lg:col-span-6">
-        <livewire:components.request-type-approver.request-type-approver-list-component requestTypeId="{{ $requestTypeData->id }}" 
-        :requesttypedata="$requestTypeData" />
+        <livewire:components.request-type-approver.request-type-approver-list-component
+            requestTypeId="{{ $requestTypeData->id }}" :requesttypedata="$requestTypeData" />
     </div>
 
 </x-main-layout>
