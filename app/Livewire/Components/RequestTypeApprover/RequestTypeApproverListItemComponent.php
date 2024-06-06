@@ -20,7 +20,7 @@ class RequestTypeApproverListItemComponent extends Component
 
     public function destroy($hash)
     {
-        $this->destroyResource(RequestTypeApprover::class, $hash);
+        $this->hardDestroyResource(RequestTypeApprover::class, $hash);
         return $this->redirectRoute('request-type-approver.create', ['hash' => $this->requesttypedata->hash]);
     }
 }

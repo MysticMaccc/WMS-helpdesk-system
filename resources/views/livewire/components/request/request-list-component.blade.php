@@ -1,4 +1,4 @@
-<x-table-list listTitle="{{ $listTitle }}" :data="$requestData">
+<x-table-list listTitle="{{ $listTitle }}" :data="$requestData" wire:model.live="search" placeholder="Search reference #">
 
     <x-slot:buttonSlot>
 
@@ -13,15 +13,29 @@
 
     <x-slot:headSlot>
         <x-th>Reference #</x-th>
-        <x-th>Request Type</x-th>
-        <x-th>Category</x-th>
+        <x-th>
+            <x-TheadSelectOption :data="$requestTypeData" defaultOption="Request Type" wire:model.live="requestType"
+                class="w-28" />
+        </x-th>
+        <x-th>
+            <x-TheadSelectOption :data="$categoryData" defaultOption="Category" wire:model.live="category" class="w-28" />
+
+        </x-th>
         <x-th>Requested By</x-th>
-        <x-th>Department</x-th>
+        <x-th>
+            <x-TheadSelectOption :data="$departmentData" defaultOption="Department" wire:model.live="department"
+                class="w-36" />
+        </x-th>
         <x-th>Details</x-th>
         <x-th>Cost</x-th>
-        <x-th>Assigned To</x-th>
+        <x-th>
+            <x-TheadSelectOption :data="$assignedPersonnelData" defaultOption="Assigned To" wire:model.live="assignedTo"
+                class="w-36" />
+        </x-th>
         <x-th>Requested At</x-th>
-        <x-th>Status</x-th>
+        <x-th>
+            <x-TheadSelectOption :data="$statusData" defaultOption="Status" wire:model.live="status" class="w-28" />
+        </x-th>
         <x-th>Action</x-th>
     </x-slot:headSlot>
 

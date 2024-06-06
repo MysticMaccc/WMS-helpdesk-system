@@ -112,7 +112,7 @@ class CreateRequestView extends Component
                     'status_id' => $this->nextStatusData->request_type_status->id
                 ];
             }
-
+            
             $this->storeResource(RequestUpdateLog::class, $requestLogAttributes);
             $this->updateResource(Request::class, $requestAttributes);
         });

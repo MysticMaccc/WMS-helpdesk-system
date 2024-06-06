@@ -61,9 +61,15 @@ class Request extends Model
         return $this->hasMany(RequestUpdateLog::class,'request_id');
     }
 
+
     public function assigned_to()
     {
         return $this->belongsTo(User::class,'assigned_user_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
 
     // ACCESSOR

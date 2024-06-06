@@ -17,7 +17,7 @@ trait ResourcesTrait
 
             session()->flash('success', 'Saving data successful!');
         } catch (Exception $e) {
-            session()->flash('error', $exceptionMsg != null ? $exceptionMsg:$e->getMessage());
+            session()->flash('error', $exceptionMsg != null ? $exceptionMsg : $e->getMessage());
         }
     }
 
@@ -50,6 +50,22 @@ trait ResourcesTrait
             $destroy = $modelClassName::where('hash', '=', $hashValue)->first()->update([
                 'is_active' => 0
             ]);
+
+            if (!$destroy) {
+                session()->flash('error', 'Deleting data failed!');
+                return;
+            }
+
+            session()->flash('success', 'Deleting data successful!');
+        } catch (Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+    }
+
+    public function hardDestroyResource($modelClassName, $hashValue)
+    {
+        try {
+            $destroy = $modelClassName::where('hash', '=', $hashValue)->first()->delete();
 
             if (!$destroy) {
                 session()->flash('error', 'Deleting data failed!');

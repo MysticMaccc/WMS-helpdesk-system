@@ -17,18 +17,20 @@
                 <div class="w-full">
                     <x-input label="Enter Cost" wireModel="cost" wire:model="cost" />
                 </div>
-                @if ($requestData->status_id == 3)
-                    <div class="w-full">
-                        <x-select-input wireModel="assignTo" label="Assign to" :data="$userData"
-                            wire:model="assignTo" />
-                    </div>
+                @if ($hash != null)
+                    @if ($requestData->status_id == 3)
+                        <div class="w-full">
+                            <x-select-input wireModel="assignTo" label="Assign to" :data="$userData"
+                                wire:model="assignTo" />
+                        </div>
+                    @endif
                 @endif
+
             </x-slot:form>
 
             <x-slot:actions>
-                @if ($requestData->status_id != 8)
-                    <x-button
-                        type="submit">{{ $hash !== null ? $requestData->status->name : 'Create Request' }}</x-button>
+                @if (optional($requestData)->status_id != 8 )
+                    <x-button type="submit">{{ $hash !== null ? 'Save' : 'Create Request' }}</x-button>
                 @endif
             </x-slot:actions>
 
@@ -39,6 +41,8 @@
     <div class="col-span-1 md:col-start-6 md:col-span-4 lg:col-start-8 lg:col-span-5">
         <x-card title="History">
             @if ($hash != null)
+                <p class="mt-2 font-semibold">Created By:</p>
+                <p class="text-xs italic">{{ $requestData->user->full_name }} {{ $requestData->created_at }}</p>
                 @foreach ($requestData->request_update_log as $item)
                     <p class="mt-2 font-semibold">{{ $item->status->name }} By:</p>
                     <p class="text-xs italic">{{ $item->modified_by }} {{ $item->created_at }}</p>
