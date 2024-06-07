@@ -18,7 +18,7 @@ class sendOTPAuthenticateMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($email,$otp)
+    public function __construct($email, $otp)
     {
         $this->email = $email;
         $this->otp = $otp;
@@ -30,7 +30,7 @@ class sendOTPAuthenticateMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'One Time Pin Authenticate Mail',
+            subject: 'HELP-DESK: OTP Verification',
         );
     }
 

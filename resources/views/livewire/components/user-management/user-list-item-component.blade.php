@@ -4,20 +4,26 @@
             <div class="image-fit h-24 w-24 lg:mr-1 lg:h-12 lg:w-12">
                 <img class="rounded-full" src="{{asset('images/profile.png')}}" alt="Midone - Tailwind Admin Dashboard Template">
             </div>
-            <div class="mt-3 text-center lg:ml-2 lg:mr-auto lg:mt-0 lg:text-left">
+            <div class="mt-3 text-center text-lg lg:ml-2 lg:mr-auto lg:mt-0 lg:text-left">
                 <a class="font-medium" href="">
                     {{ $data->full_name }}
                 </a>
-                <div class="mt-0.5 text-xs text-slate-500">
-                    {{ $data->email}}
-                </div>
                 @if(optional($data->department)->name)
-                <div class="mt-0.5 text-xs text-slate-500">
+                <div class="mt-0.5 text-xs text-slate-500 font-bold italic">
                     {{ optional($data->department)->name}}
                 </div>
                 @else
-                <div class="mt-0.5 text-xs text-red-500">
+                <div class="mt-0.5 text-xs text-red-500 font-bold italic">
                     <-- No Department -->
+                </div>
+                @endif
+                @if(optional($data->position)->name)
+                <div class="mt-0.5 text-xs text-slate-500 italic">
+                    {{ $data->position->name }}
+                </div>
+                @else
+                <div class="mt-0.5 text-xs text-red-500 italic">
+                    <i><-- No position --></i>
                 </div>
                 @endif
             </div>

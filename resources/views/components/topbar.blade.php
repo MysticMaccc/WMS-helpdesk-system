@@ -1,6 +1,6 @@
 @props(['title'])
 <section>
-    <div class="relative z-[51] flex h-[67px] items-center border-b border-slate-200">
+    <div class="relative z-[45] flex h-[67px] items-center border-b border-slate-200">
         <!-- BEGIN: Breadcrumb -->
         <nav aria-label="breadcrumb" class="flex -intro-x mr-auto  sm:flex">
             <ol class="flex items-center text-theme-1 dark:text-slate-300">
