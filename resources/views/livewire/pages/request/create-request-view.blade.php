@@ -11,7 +11,6 @@
                 @endif
             </x-slot:description>
 
-
             <x-slot:form>
                 <div class="w-full">
                     <x-select-input wireModel="requestType" label="Select Request Type" :data="$requestTypeData"

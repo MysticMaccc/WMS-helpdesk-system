@@ -153,4 +153,5 @@ class CreateRequestView extends Component
         session()->flash('success', 'Request updated successfully!');
         return $this->redirectRoute('request.index', navigate: true);
     }
+    
 }
