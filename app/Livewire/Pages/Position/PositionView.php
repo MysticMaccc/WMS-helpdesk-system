@@ -27,18 +27,18 @@ class PositionView extends Component
         $this->actionMessage = false;
     }
 
-    public function ForAddPosition(){
-        $data = [
-            'hash' => md5($this->newposition),
-            'name' => $this->newposition,
-            'is_active' => 1,
-            'modified_by' => Auth::user()->firstname.' '.Auth::user()->lastname
-        ];
-        positions::createData($data);
-    }
+    // public function ForAddPosition(){
+    //     $data = [
+    //         'hash' => md5($this->newposition),
+    //         'name' => $this->newposition,
+    //         'is_active' => 1,
+    //         'modified_by' => Auth::user()->firstname.' '.Auth::user()->lastname
+    //     ];
+    //     positions::createData($data);
+    // }
 
-    public function deletePosition($hash){
-        // dd($hash);
-        positions::deleteData($hash);
-    }
+    // public function deletePosition($hash){
+    //     // dd($hash);
+    //     positions::deleteData($hash);
+    // }
 }

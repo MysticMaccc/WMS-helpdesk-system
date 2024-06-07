@@ -1,19 +1,17 @@
-<div x-data="{showModal:false}">
-
-    <h2 class="intro-y mt-10 text-lg font-medium">{{ $title }}</h2>
-    <div class="mt-5 grid grid-cols-12 gap-6">
-        <div class="col-span-1 md:col-span-9 lg:col-span-12" x-data="{ requestMessage: $wire.actionMessage }">
-            <div x-show="requestMessage">
-                <x-action-message x-on:click="$wire.destroyRequestMessage()" />
-            </div>
+<section>
+    <div class="col-span-1 md:col-span-9 lg:col-span-12" x-data="{ requestMessage: $wire.actionMessage }">
+        <div x-show="requestMessage">
+            <x-action-message x-on:click="$wire.destroyRequestMessage()" />
         </div>
+    </div>
+    <x-topbar title="Position" />
+    <h2 class="intro-y mt-10 text-lg font-medium">{{ $title }}</h2>
+    <div class="mt-10 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap">
-            <button @click="showModal = true" data-tw-merge data-tw-toggle="modal"
-                data-tw-target="#large-modal-size-preview" data-tw-merge=""
-                class="
-                transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300
-                 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-2 shadow-md">Add
-                New Position</button>
+            <a href="{{route('position.create')}}"
+                class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:rotate-2 hover:scale-110 hover:bg-indigo-500 duration-300
+                         border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-2 shadow-md">Add
+                New Position</a>
             <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative">
                 <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150"
                     data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
@@ -84,11 +82,11 @@
                                     <i data-tw-merge="" data-lucide="check-square" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                     Edit
                                 </a>
-                                <a class="flex items-center text-danger" x-click=""
+                                {{-- <a class="flex items-center text-danger" x-click=""
                                     wire:click="deletePosition({{$item->id}})" href="#">
                                     <i data-tw-merge="" data-lucide="trash" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                     Delete
-                                </a>
+                                </a> --}}
                             </div>
                         </td>
                     </tr>
@@ -113,19 +111,4 @@
             <!-- END: Notification Content -->
         </div>
     </div>
-
-    <div x-show="showModal">
-        <x-modal title="Add New Position">
-            <x-slot name="body">
-                <input type="text" wire:model="newposition" class="w-full rounded-lg text-center"
-                    placeholder="Enter new position">
-            </x-slot>
-            <x-slot name="actions">
-                <button wire:click="ForAddPosition"
-                    class="w-full mt-2 h-9 bg-indigo-950 text-white rounded-lg">Add</button>
-                <button x-on:click="showModal = !showModal"
-                    class="w-full mt-2 h-9 bg-red-600 text-white rounded-lg">Close</button>
-            </x-slot>
-        </x-modal>
-    </div>
-</div>
+</section>

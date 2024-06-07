@@ -1,20 +1,20 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
-import typography from '@tailwindcss/typography';
+import defaultTheme from "tailwindcss/defaultTheme";
+import forms from "@tailwindcss/forms";
+import typography from "@tailwindcss/typography";
 
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './vendor/laravel/jetstream/**/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./vendor/laravel/jetstream/**/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
     ],
 
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
         },
     },
@@ -34,10 +34,10 @@ const toRGB = (value) => {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './vendor/laravel/jetstream/**/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./vendor/laravel/jetstream/**/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
     ],
     darkMode: "class",
     theme: {
@@ -71,7 +71,7 @@ module.exports = {
             },
             fontFamily: {
                 roboto: ["Roboto"],
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
             container: {
                 center: true,
@@ -101,7 +101,8 @@ module.exports = {
         },
     },
     plugins: [
-        forms, typography,
+        forms,
+        typography,
         require("@tailwindcss/forms"),
         plugin(function ({ addBase }) {
             addBase({
@@ -210,4 +211,3 @@ module.exports = {
         },
     },
 };
-

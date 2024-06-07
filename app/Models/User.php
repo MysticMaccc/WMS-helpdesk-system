@@ -73,6 +73,19 @@ class User extends Authenticatable
         ];
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $lastId = $model::orderBy('id', 'DESC')->first();
+            $hash_id = $lastId != NULL ? encrypt($lastId->id + 1) : encrypt(1);
+            $model->hash = $hash_id;
+            $model->is_active = 1;
+            $model->modified_by = 'system';
+        });
+    }
+
     // relationships
     public function position()
     {

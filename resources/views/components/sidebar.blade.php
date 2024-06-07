@@ -24,7 +24,8 @@
             <x-sidebar-link-item label="Request Type Status" route="request-type-status.index" />
         </x-nested-sidebar-item>
 
-        <x-nested-sidebar-item label="Maintenance">
+        <x-nested-sidebar-item label="Maintenance"
+            :status="in_array($activeRoute, ['position.index', 'user-role.index', 'department.index', 'user-management.index', 'user-type.index'])">
             <x-sidebar-link-item label="Position Maintenance" route="position.index"
                 :status="in_array($activeRoute, ['position.index'])" />
             <x-sidebar-link-item label="User Roles" route="user-role.index"
@@ -33,8 +34,11 @@
             <x-sidebar-link-item label="Department" route="department.index"
                 :status="in_array($activeRoute, ['department.index'])" />
 
-        <x-sidebar-link-item label="User Management" route="user-management.index" :status="in_array($activeRoute, ['user-management.index', 'user-management.edit'])" />
-            
+            <x-sidebar-link-item label="User Management" route="user-management.index"
+                :status="in_array($activeRoute, ['user-management.index'])" />
+
+            <x-sidebar-link-item label="User Type Management" route="user-type.index"
+                :status="in_array($activeRoute, ['user-type.index'])" />
         </x-nested-sidebar-item>
     </ul>
 </nav>
