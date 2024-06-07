@@ -8,16 +8,23 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Position extends Component
+class PositionView extends Component
 {
     use WithPagination;
     public $newposition = null;
+    public $actionMessage = true;   
     public $title = "Position Maintenance";
     #[Layout('layouts.app')]
     public function render()
     {
         $positions = positions::getAllPositions();
-        return view('livewire.pages.position.position', compact('positions'));
+        return view('livewire.pages.position.position-view', compact('positions'));
+
+    }
+
+    public function destroyRequestMessage()
+    {
+        $this->actionMessage = false;
     }
 
     public function ForAddPosition(){
@@ -27,8 +34,6 @@ class Position extends Component
             'is_active' => 1,
             'modified_by' => Auth::user()->firstname.' '.Auth::user()->lastname
         ];
-
-        dd($data);
         positions::createData($data);
     }
 

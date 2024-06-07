@@ -25,7 +25,6 @@ trait ResourcesTrait
     {
         try {
             $instance = $modelClassName::where('hash', $this->hash)->first();
-
             if (!$instance) {
                 session()->flash('error', 'Data do not exist!');
                 return;

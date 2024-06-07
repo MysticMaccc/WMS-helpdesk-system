@@ -1,8 +1,15 @@
-<div>
+<div x-data="{showModal:false}">
+
     <h2 class="intro-y mt-10 text-lg font-medium">{{ $title }}</h2>
     <div class="mt-5 grid grid-cols-12 gap-6">
+        <div class="col-span-1 md:col-span-9 lg:col-span-12" x-data="{ requestMessage: $wire.actionMessage }">
+            <div x-show="requestMessage">
+                <x-action-message x-on:click="$wire.destroyRequestMessage()" />
+            </div>
+        </div>
         <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap">
-            <button data-tw-merge data-tw-toggle="modal" data-tw-target="#large-modal-size-preview" data-tw-merge=""
+            <button @click="showModal = true" data-tw-merge data-tw-toggle="modal"
+                data-tw-target="#large-modal-size-preview" data-tw-merge=""
                 class="
                 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300
                  border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-2 shadow-md">Add
@@ -72,12 +79,13 @@
                         <td data-tw-merge=""
                             class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
                             <div class="flex items-center justify-center">
-                                <a class="mr-3 flex items-center" href="#">
+                                <a class="mr-3 flex cursor-pointer items-center"
+                                    href="{{route('position.edit-position', ['hash' => $item->hash])}}">
                                     <i data-tw-merge="" data-lucide="check-square" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                     Edit
                                 </a>
-                                <a class="flex items-center text-danger" wire:click="deletePosition({{$item->id}})"
-                                    href="#">
+                                <a class="flex items-center text-danger" x-click=""
+                                    wire:click="deletePosition({{$item->id}})" href="#">
                                     <i data-tw-merge="" data-lucide="trash" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                     Delete
                                 </a>
@@ -90,35 +98,34 @@
         </div>
         <!-- END: Data List -->
     </div>
-    <!-- BEGIN: Super Large Modal Content -->
-    <!-- END: Super Large Modal Content -->
-    <div class="text-center">
-        <!-- BEGIN: Notification Content -->
-        <div id="basic-non-sticky-notification-content" class="py-5 pl-5 pr-14 bg-white border border-slate-200/60 rounded-lg shadow-xl dark:bg-darkmode-600 dark:text-slate-300 dark:border-darkmode-600 hidden flex flex flex-col sm:flex-row flex flex-col sm:flex-row">
-            <div class="font-medium">
-                Yay! Updates Published!
-            </div>
-            <a class="mt-1 font-medium text-primary dark:text-slate-400 sm:ml-40 sm:mt-0" href="">
-                Review Changes
-            </a>
-        </div>
-        <!-- END: Notification Content -->
-        <!-- BEGIN: Notification Toggle -->
-        <button data-tw-merge id="basic-non-sticky-notification-toggle" class="intro-y transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-1 mr-1">Show Non Sticky Notification</button>
-        <!-- END: Notification Toggle -->
-    </div>
-    <div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="large-modal-size-preview" class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
-        <div data-tw-merge class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-16 group-[.show]:mt-16 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600    sm:w-[600px] lg:w-[900px] p-10 text-center">
-            <div class="modal-content">
-                <div class="modal-header border-b-2">
-                    <h2 class="font-medium text-lg">Add New Position</h2>
+    <div x-data="{notification:false}">
+        <div x-show="notification" class="text-center">
+            <!-- BEGIN: Notification Content -->
+            <div id="basic-non-sticky-notification-content"
+                class="py-5 pl-5 pr-14 bg-white border border-slate-200/60 rounded-lg shadow-xl dark:bg-darkmode-600 dark:text-slate-300 dark:border-darkmode-600 hidden sm:flex sm:flex-row">
+                <div class="font-medium">
+                    Yay! Updates Published!
                 </div>
-            <div class="mt-2">
-                <input type="text" wire:model="newposition" class="w-full rounded-lg text-center" placeholder="Enter new position">
+                <a class="mt-1 font-medium text-primary dark:text-slate-400 sm:ml-40 sm:mt-0" href="">
+                    Review Changes
+                </a>
             </div>
-            <div>
-                <button wire:click="ForAddPosition" class="w-full mt-2 h-9 bg-indigo-950 text-white rounded-lg">Add</button>
-            </div>
+            <!-- END: Notification Content -->
         </div>
+    </div>
+
+    <div x-show="showModal">
+        <x-modal title="Add New Position">
+            <x-slot name="body">
+                <input type="text" wire:model="newposition" class="w-full rounded-lg text-center"
+                    placeholder="Enter new position">
+            </x-slot>
+            <x-slot name="actions">
+                <button wire:click="ForAddPosition"
+                    class="w-full mt-2 h-9 bg-indigo-950 text-white rounded-lg">Add</button>
+                <button x-on:click="showModal = !showModal"
+                    class="w-full mt-2 h-9 bg-red-600 text-white rounded-lg">Close</button>
+            </x-slot>
+        </x-modal>
     </div>
 </div>

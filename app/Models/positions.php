@@ -11,6 +11,7 @@ class positions extends Model
     protected $table = 'positions';
     protected $fillable = ['hash', 'name', 'is_active', 'modified_by'];
 
+
     public static function createData($data){
         return static::create($data);
     }
@@ -24,6 +25,7 @@ class positions extends Model
     }
 
     public static function updateData($hash, $data){
+        session()->flash('success', 'Updating data successful!');
         return static::where('hash', $hash)->update($data);
     }
 

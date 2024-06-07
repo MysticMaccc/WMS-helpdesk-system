@@ -3,7 +3,8 @@
 use App\Livewire\Pages\Category\CategoryView;
 use App\Livewire\Pages\Category\CreateCategoryView;
 use App\Livewire\Pages\Login\LogIn;
-use App\Livewire\Pages\Position\Position;
+use App\Livewire\Pages\Position\EditPosition;
+use App\Livewire\Pages\Position\PositionView;
 use App\Livewire\Pages\Request\CreateRequestView;
 use App\Livewire\Pages\Request\RequestView;
 use App\Livewire\Pages\RequestType\CreateRequestTypeView;
@@ -40,7 +41,8 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
     });
 
     Route::prefix('position')->as('position.')->group(function () {
-        Route::get('index', Position::class)->name('index');
+        Route::get('index', PositionView::class)->name('index');
+        Route::get('edit/{hash}', EditPosition::class)->name('edit-position');
     });
 
     Route::prefix('request-type')->as('request-type.')->group(function () {
