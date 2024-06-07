@@ -104,9 +104,24 @@ class User extends Authenticatable
         return $this->hasMany(Request::class, 'assigned_user_id');
     }
 
+    public function request()
+    {
+        return $this->hasMany(Request::class, 'user_id');
+    }
+
     // accessor
     public function getFullNameAttribute()
     {
         return $this->firstname . " " . $this->middlename . " " . $this->lastname;
+    }
+
+    public function getNameAttribute()
+    {
+        return strtoupper($this->firstname) . " " . strtoupper($this->middlename) . " " . strtoupper($this->lastname);
+    }
+
+    public function assigned_department()
+    {
+        return $this->belongsTo(Department::class, 'user_id');
     }
 }

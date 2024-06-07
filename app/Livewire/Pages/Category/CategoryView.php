@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class CategoryView extends Component
 {
-    public $title="Category Maintenance";
+    public $title = "Category Maintenance";
     public $actionMessage = true;
 
     #[Layout('layouts.app')]

@@ -8,7 +8,8 @@
     </x-slot:headSlot>
 
     @foreach ($approverData as $item)
-        <livewire:components.request-type-approver.request-type-approver-list-item-component :data="$item" wire:key="{{ $item->id }}" />
+        <livewire:components.request-type-approver.request-type-approver-list-item-component :requesttypedata="$requesttypedata" 
+        :data="$item" wire:key="{{ $item->id }}" />
     @endforeach
 
 </x-table-list>

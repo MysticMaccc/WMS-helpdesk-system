@@ -6,9 +6,8 @@
         </x-slot:headSlot>
 
         @foreach ($userRoleData as $item)
-            <livewire:components.user-role.user-role-list-item-component :data="$item" :key="$item->id" />
+        <livewire:components.user-role.user-role-list-item-component :data="$item" :key="$item->id" />
         @endforeach
 
-        
     </x-table-list>
 </div>

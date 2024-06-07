@@ -1,13 +1,13 @@
-<x-table-list listTitle="{{ $listTitle }}" :data="$requestTypeData">
+<x-table-list listTitle="{{ $listTitle }}" :data="$requestTypeData" wire:model.live="search">
 
     <x-slot:buttonSlot>
 
         <x-list-button title="Create Request Type" wire:click="create()" />
 
-        <x-dropdown>
+        {{-- <x-dropdown>
             <x-dropdown-link title="Print" />
             <x-dropdown-link title="Export" />
-        </x-dropdown>
+        </x-dropdown> --}}
 
     </x-slot:buttonSlot>
 
@@ -19,7 +19,8 @@
     </x-slot:headSlot>
 
     @foreach ($requestTypeData as $item)
-        <livewire:components.request-type.request-type-list-item-component :data="$item" />
+        <livewire:components.request-type.request-type-list-item-component :data="$item"
+            wire:key="{{ $item->id }}" />
     @endforeach
 
 </x-table-list>

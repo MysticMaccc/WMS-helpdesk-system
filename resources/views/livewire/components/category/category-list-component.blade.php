@@ -20,7 +20,7 @@
     </x-slot:headSlot>
 
     @foreach ($categoryData as $item)
-        <livewire:components.category.category-list-item-component :data="$item" wire:key="{{ $item->id }}" />
+    <livewire:components.category.category-list-item-component :data="$item" wire:key="{{ $item->id }}" />
     @endforeach
 
 </x-table-list>

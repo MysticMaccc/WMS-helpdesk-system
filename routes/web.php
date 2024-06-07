@@ -2,6 +2,8 @@
 
 use App\Livewire\Pages\Category\CategoryView;
 use App\Livewire\Pages\Category\CreateCategoryView;
+use App\Livewire\Pages\Department\CreateDepartmentView;
+use App\Livewire\Pages\Department\DepartmentView;
 use App\Livewire\Pages\Login\LogIn;
 use App\Livewire\Pages\Position\EditPosition;
 use App\Livewire\Pages\Position\PositionView;
@@ -12,6 +14,8 @@ use App\Livewire\Pages\RequestType\RequestTypeView;
 use App\Livewire\Pages\RequestTypeApprover\CreateRequestTypeApproverView;
 use App\Livewire\Pages\RequestTypeStatus\CreateRequestTypeStatusView;
 use App\Livewire\Pages\RequestTypeStatus\RequestTypeStatusView;
+use App\Livewire\Pages\UserManagement\UserEditView;
+use App\Livewire\Pages\UserManagement\UserView;
 use App\Livewire\Pages\UserRole\UserRoleView;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +29,6 @@ Route::middleware('guest')->group(function () {
     // });
 
     Route::get('login', LogIn::class)->name('login');
-
 });
 
 
@@ -71,5 +74,16 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
 
     Route::prefix('user-role')->as('user-role.')->group(function () {
         Route::get('index', UserRoleView::class)->name('index');
+    });
+
+    Route::prefix('user-management')->as('user-management.')->group(function () {
+        Route::get('index', UserView::class)->name('index');
+        Route::get('edit/{hash}', UserEditView::class)->name('edit');
+    });
+
+    Route::prefix('department')->as('department.')->group(function () {
+        Route::get('index', DepartmentView::class)->name('index');
+        Route::get('create', CreateDepartmentView::class)->name('create');
+        Route::get('edit/{hash}', CreateDepartmentView::class)->name('edit');
     });
 });
