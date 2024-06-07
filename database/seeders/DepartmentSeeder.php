@@ -20,12 +20,15 @@ class DepartmentSeeder extends Seeder
         $data = [
             1 => ['Production Department'],
             2 => ['Quality Control Department'],
-            3 => ['Engine Department'],
-            4 => ['Supply Chain Department'],
-            5 => ['Human Resource Department'],
+            3 => ['Maintenance Department'],
+            4 => ['Research and Development Department'],
+            5 => ['Logistics Department'],
+            6 => ['Human Resources Department'],
+            7 => ['Sales and Marketing Department'],
+            8 => ['Finance Department'],
         ];
 
-        foreach($data as $index=>[$name]){
+        foreach ($data as $index => [$name]) {
             Department::create([
                 'user_id' => 1,
                 'hash' => encrypt($index),

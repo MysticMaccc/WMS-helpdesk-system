@@ -9,7 +9,7 @@
     </div>
     <div class="p-5">
         <div class="preview relative [&.hide]:overflow-hidden [&.hide]:h-0">
-            <form wire:submit.prevent="{{ $submit }}">
+            <form wire:submit.prevent="{{ $submit }}" {{ $attributes }} >
                 @csrf
                 <div
                     class="px-4 py-5 bg-white sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">

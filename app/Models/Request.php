@@ -38,7 +38,7 @@ class Request extends Model
     // relationship
     public function attachment()
     {
-        return $this->hasMany(Attachment::class, 'request_id');
+        return $this->hasMany(Attachment::class, 'reference_number');
     }
 
     public function status()
@@ -61,9 +61,15 @@ class Request extends Model
         return $this->hasMany(RequestUpdateLog::class,'request_id');
     }
 
+
     public function assigned_to()
     {
         return $this->belongsTo(User::class,'assigned_user_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
 
     // ACCESSOR
