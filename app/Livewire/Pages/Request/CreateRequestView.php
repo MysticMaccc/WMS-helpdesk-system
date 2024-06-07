@@ -12,6 +12,7 @@ use App\ResourcesTrait;
 use App\UtilitiesTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -116,6 +117,12 @@ class CreateRequestView extends Component
     public function update()
     {
         $transaction = DB::transaction(function () {
+
+            Gate::authorize('authorizeRequest', [
+                $this->nextStatusData->request_type_id,
+                $this->nextStatusData->request_type_status->id
+            ]);
+
             $requestLogAttributes = [
                 'request_id' => $this->requestData->id,
                 'status_id' => $this->requestData->status_id,
@@ -146,4 +153,5 @@ class CreateRequestView extends Component
         session()->flash('success', 'Request updated successfully!');
         return $this->redirectRoute('request.index', navigate: true);
     }
+    
 }
