@@ -16,9 +16,11 @@ class CreateDepartmentView extends Component
     public $hash;
     public $users;
     #[Validate([
+        'user_id' => 'required',
         'department' => 'required|min:2',
     ])]
     public $department;
+    public $user_id;
 
     public function mount($hash = null)
     {
@@ -29,6 +31,7 @@ class CreateDepartmentView extends Component
                 abort(404);
             }
             $this->department = $departmentData->name;
+            $this->user_id = $departmentData->user_id;
         }
 
         $this->users = User::where('is_active', 1)->get();
@@ -37,6 +40,7 @@ class CreateDepartmentView extends Component
     {
         $this->validate();
         $this->storeResource(Department::class, [
+            'user_id' => $this->user_id,
             'name' => $this->department,
         ]);
         return $this->redirectRoute('department.index', navigate: true);
@@ -46,6 +50,7 @@ class CreateDepartmentView extends Component
     {
         $this->validate();
         $this->updateResource(Department::class, [
+            'user_id' => $this->user_id,
             'name' => $this->department,
         ]);
         return $this->redirectRoute('department.index', navigate: true);

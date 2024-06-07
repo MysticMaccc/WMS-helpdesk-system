@@ -12,6 +12,8 @@ use App\Livewire\Pages\RequestType\RequestTypeView;
 use App\Livewire\Pages\RequestTypeApprover\CreateRequestTypeApproverView;
 use App\Livewire\Pages\RequestTypeStatus\CreateRequestTypeStatusView;
 use App\Livewire\Pages\RequestTypeStatus\RequestTypeStatusView;
+use App\Livewire\Pages\UserManagement\UserEditView;
+use App\Livewire\Pages\UserManagement\UserView;
 use App\Livewire\Pages\UserRole\UserRoleView;
 use Illuminate\Support\Facades\Route;
 
@@ -67,8 +69,14 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
         Route::get('index', UserRoleView::class)->name('index');
     });
 
+    Route::prefix('user-management')->as('user-management.')->group(function () {
+        Route::get('index', UserView::class)->name('index');
+        Route::get('edit/{hash}', UserEditView::class)->name('edit');
+    });
+
     Route::prefix('department')->as('department.')->group(function () {
         Route::get('index', DepartmentView::class)->name('index');
         Route::get('create', CreateDepartmentView::class)->name('create');
+        Route::get('edit/{hash}', CreateDepartmentView::class)->name('edit');
     });
 });

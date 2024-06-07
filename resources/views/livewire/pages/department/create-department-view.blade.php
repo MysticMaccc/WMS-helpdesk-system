@@ -24,5 +24,4 @@
             <x-anchor title="Go back" href="{{ route('department.index') }}" wire:navigate />
         </x-form-section>
     </div>
-
 </x-main-layout>

@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    
+
     <div class="rubick px-5 sm:px-8 py-5 before:content-[''] before:bg-gradient-to-b before:from-theme-1 before:to-theme-2 dark:before:from-darkmode-800 dark:before:to-darkmode-800 before:fixed before:inset-0 before:z-[-1]">
         <!-- BEGIN: Mobile Menu -->
         <div class="mobile-menu group top-0 inset-x-0 fixed bg-theme-1/90 z-[60] border-b border-white/[0.08] dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0 [&.mobile-menu--active]:before:visible [&.mobile-menu--active]:before:opacity-100">
@@ -51,7 +51,7 @@
         <!-- END: Mobile Menu -->
         <div class="mt-[4.7rem] flex md:mt-0">
             <!-- BEGIN: Side Menu -->
-           <x-sidebar />
+            <x-sidebar />
             <!-- END: Side Menu -->
             <!-- BEGIN: Content -->
             <div class="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]">
@@ -97,6 +97,8 @@
     <script src="{{ asset('dist/js/components/base/leaflet-map-loader.js') }}"></script>
     <script src="{{ asset('dist/js/components/mobile-menu.js') }}"></script>
     <script src="{{ asset('dist/js/components/themes/rubick/top-bar.js') }}"></script>
+    <script src="{{asset('dist/js/vendors/tab.js')}}"></script>
+
     <!-- END: Vendor JS Assets-->
 </body>
 

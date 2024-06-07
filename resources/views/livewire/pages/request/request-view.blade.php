@@ -1,11 +1,14 @@
-<x-main-layout :title="$title">
+<section>
+    <x-topbar title="Request List" />
+    <x-main-layout :title="$title">
 
-    <div x-data="{ requestMessage: $wire.actionMessage }">
-        <template x-if="requestMessage">
-            <x-action-message />
-        </template>
-    </div>
+        <div class="col-span-1 md:col-span-9 lg:col-span-12" x-data="{ requestMessage: $wire.actionMessage }">
+            <div x-show="requestMessage">
+                <x-action-message x-on:click="$wire.destroyRequestMessage()" />
+            </div>
+        </div>
 
-    <livewire:components.request.request-list-component />
+        <livewire:components.request.request-list-component />
 
-</x-main-layout>
+    </x-main-layout>
+</section>
