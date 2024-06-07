@@ -25,17 +25,17 @@
         </x-nested-sidebar-item>
 
         <x-nested-sidebar-item label="Maintenance">
-            <x-sidebar-link-item label="Position Maintenance" route="position.index" />
+            <x-sidebar-link-item label="Position Maintenance" route="position.index"
+                :status="in_array($activeRoute, ['position.index'])" />
+            <x-sidebar-link-item label="User Roles" route="user-role.index"
+                :status="in_array($activeRoute, ['user-role.index'])" />
+
+            <x-sidebar-link-item label="Department" route="department.index"
+                :status="in_array($activeRoute, ['department.index'])" />
+
+            <x-sidebar-link-item label="User Management" route="user-management.index"
+                :status="in_array($activeRoute, ['user-management.index'])" />
         </x-nested-sidebar-item>
-
-        <x-sidebar-link-item label="User Roles" route="user-role.index"
-            :status="in_array($activeRoute, ['user-role.index'])" />
-
-        <x-sidebar-link-item label="Department" route="department.index"
-            :status="in_array($activeRoute, ['department.index'])" />
-
-        <x-sidebar-link-item label="User Management" route="user-management.index"
-            :status="in_array($activeRoute, ['user-management.index'])" />
 
 
     </ul>
