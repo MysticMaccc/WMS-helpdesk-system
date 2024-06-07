@@ -1,5 +1,6 @@
 @props(['title'])
 <section>
+    <x-topbar title="Request List" />
     <div class="intro-y mt-8 flex flex-col items-center sm:flex-row">
         <h2 class="mr-auto text-lg font-medium">{{ $title }}</h2>
     </div>

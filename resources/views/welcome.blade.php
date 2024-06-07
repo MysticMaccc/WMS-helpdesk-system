@@ -20,7 +20,8 @@
 <body class="font-sans antialiased bg-sky-400 flex flex-col gap-4">
 
     <div class="basis-3/12">
-        <h2 class="text-zinc-800 font-bold text-2xl ml-24">DOTS PER INCH</h2>
+        <h2 class="text-zinc-800 font-bold 
+        md:text-2xl md:ml-24 lg:text-2xl lg:ml-24 ">DOTS PER INCH</h2>
     </div>
 
     <div class="basis-5/12 mx-auto rounded-full px-4 py-4 shadow-2xl shadow-zinc-950 bg-slate-200">
@@ -30,7 +31,7 @@
     </div>
 
     <div class="basis-3/12 mx-auto">
-        <h2 class="text-zinc-800 font-bold text-4xl">Welcome to Helpdesk System</h2>
+        <h2 class="text-zinc-800 font-bold text-xl md:text-4xl lg:text-4xl">Welcome to Helpdesk System</h2>
     </div>
 
     <div class="basis-3/12 mx-auto border-2 ">
@@ -43,7 +44,7 @@
                 </a>
             @else
                 <a href="{{ route('login') }}"
-                    class="rounded-full bg-sky-700 text-slate-100 text-xl px-28 py-2 shadow-xl shadow-gray-600
+                    class="rounded-full bg-sky-700 text-slate-100 text-xl px-28 py-2 shadow-xl shadow-gray-600 no-underline
                              hover:bg-sky-900 hover:text-slate-50 hover:shadow-gray-900">
                     Login
                 </a>
