@@ -14,7 +14,7 @@
             <x-slot:form>
                 <div class="w-full">
                     <x-select-input wireModel="requestType" label="Select Request Type" :data="$requestTypeData"
-                        wire:model="requestType" />
+                        wire:model.live="requestType" />
                 </div>
                 <div class="w-full">
                     <x-text-area label="Enter Details" wireModel="details" wire:model="details" />

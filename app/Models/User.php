@@ -109,6 +109,11 @@ class User extends Authenticatable
         return $this->hasMany(Request::class, 'user_id');
     }
 
+    public function notification()
+    {
+        return $this->hasMany(Notification::class, 'for_user', 'id');
+    }
+
     // accessor
     public function getFullNameAttribute()
     {
