@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Components\UserManagement\UserCrudComponent;
 use App\Livewire\Pages\Category\CategoryView;
 use App\Livewire\Pages\Category\CreateCategoryView;
 use App\Livewire\Pages\Department\CreateDepartmentView;
@@ -89,6 +90,7 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
     Route::prefix('user-management')->as('user-management.')->group(function () {
         Route::get('index', UserView::class)->name('index');
         Route::get('edit/{hash}', UserEditView::class)->name('edit');
+        Route::get('create', UserCrudComponent::class)->name('create');
     });
 
     Route::prefix('department')->as('department.')->group(function () {
