@@ -26,8 +26,6 @@
 
         <x-sidebar-link-item label="Department" route="department.index" :status="in_array($activeRoute, ['department.index'])" />
 
-        <x-sidebar-link-item label="User Management" route="user-management.index" :status="in_array($activeRoute, ['user-management.index'])" />
-
-
+        <x-sidebar-link-item label="User Management" route="user-management.index" :status="in_array($activeRoute, ['user-management.index', 'user-management.edit'])" />
     </ul>
 </nav>
