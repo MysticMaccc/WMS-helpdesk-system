@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Request;
 
 use App\Models\Attachment;
+use App\Models\Notification;
 use App\Models\Request;
 use App\Models\RequestType;
 use App\Models\RequestTypeApprover;
@@ -12,6 +13,7 @@ use App\ResourcesTrait;
 use App\UtilitiesTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -52,7 +54,6 @@ class CreateRequestView extends Component
             $this->nextStatusData = $this->requestData->request_type->request_type_approver
                 ->where('request_type_status_id', '>', $this->requestData->status_id)->first();
             //end of properties for updating
-            // dd($this->nextStatusData->request_type_status->id);
 
             $this->subTitle = "Reference No.";
             $this->description =  $this->requestData->reference_number;
@@ -70,8 +71,17 @@ class CreateRequestView extends Component
             ->where('is_active', true)
             ->whereHas('request_type_approver')
             ->get();
+
         $userData = User::where('is_active', 1)->orderBy('firstname', 'asc')->get();
         return view('livewire.pages.request.create-request-view', compact('requestTypeData', 'userData'));
+    }
+
+    public function updatedRequestType($value)
+    {
+        $nextApproverData = RequestTypeApprover::where('request_type_id', $value)
+            ->where('level', 2)
+            ->first();
+        $this->nextStatusData = $nextApproverData;
     }
 
     public function store()
@@ -106,6 +116,7 @@ class CreateRequestView extends Component
                     'status_id' => $statusId->request_type_status_id
                 ];
                 $this->storeResource(Request::class, $attributes);
+                $this->storeNotification($this->nextStatusData->user_id, 'New Request Created', $referenceNumber, 'request.index');
             },
             3
         );
@@ -116,6 +127,12 @@ class CreateRequestView extends Component
     public function update()
     {
         $transaction = DB::transaction(function () {
+
+            Gate::authorize('authorizeRequest', [
+                $this->nextStatusData->request_type_id,
+                $this->nextStatusData->request_type_status->id
+            ]);
+
             $requestLogAttributes = [
                 'request_id' => $this->requestData->id,
                 'status_id' => $this->requestData->status_id,
@@ -137,6 +154,13 @@ class CreateRequestView extends Component
 
             $this->storeResource(RequestUpdateLog::class, $requestLogAttributes);
             $this->updateResource(Request::class, $requestAttributes);
+            $this->storeNotification(
+                $this->nextStatusData->user_id,
+                $this->nextStatusData->request_type_status->name,
+                $this->requestData->reference_number,
+                'request.edit',
+                $this->requestData->hash
+            );
         });
 
         if (!$transaction) {
@@ -145,5 +169,16 @@ class CreateRequestView extends Component
 
         session()->flash('success', 'Request updated successfully!');
         return $this->redirectRoute('request.index', navigate: true);
+    }
+
+    public function storeNotification($userId, $title, $description, $url, $parameter = null)
+    {
+        $this->storeResource(Notification::class, [
+            'for_user' => $userId,
+            'title' => $title,
+            'description' => $description,
+            'url'  => $url,
+            'parameter' => $parameter
+        ]);
     }
 }

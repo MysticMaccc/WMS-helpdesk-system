@@ -67,6 +67,11 @@ class Request extends Model
         return $this->belongsTo(User::class,'assigned_user_id');
     }
 
+    public function notification()
+    {
+        return $this->hasMany(Notification::class,'description','reference_number');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');

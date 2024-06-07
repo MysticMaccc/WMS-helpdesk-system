@@ -4,12 +4,17 @@
         <x-form-section submit="{{ $hash !== null ? 'update' : 'store' }}" enctype="multipart/form-data">
 
             <x-slot:title>{{ $subTitle }}</x-slot:title>
-            <x-slot:description>{{ $description }}</x-slot:description>
+            <x-slot:description>
+                {{ $description }}
+                @if ($hash != null)
+                    <p>Approver: {{ $nextStatusData->approver->full_name }}</p>
+                @endif
+            </x-slot:description>
 
             <x-slot:form>
                 <div class="w-full">
                     <x-select-input wireModel="requestType" label="Select Request Type" :data="$requestTypeData"
-                        wire:model="requestType" />
+                        wire:model.live="requestType" />
                 </div>
                 <div class="w-full">
                     <x-text-area label="Enter Details" wireModel="details" wire:model="details" />
@@ -55,9 +60,12 @@
                 </p>
                 <hr />
                 @foreach ($requestData->request_update_log as $item)
-                    <p class="mt-2">
-                        <label class="font-semibold">{{ $item->status->name }} By: {{ $item->modified_by }}</label>
-                        <small class="text-xs italic">{{ $item->created_at }}</small>
+                    <p class="mt-2 font-semibold">
+                        <label class="text-sm">{{ $item->status->name }} By: </label>
+                        <small class="text-xs italic">
+                            {{ $item->modified_by }}
+                            {{ $item->created_at }}
+                        </small>
                     </p>
                     <hr />
                 @endforeach

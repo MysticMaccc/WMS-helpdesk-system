@@ -14,18 +14,27 @@
             <x-sidebar-link-item label="Home" route="dashboard" />
         </x-nested-sidebar-item>
 
-        <x-sidebar-link-item label=" Request List" :status="in_array($activeRoute, ['request.index'])" route="request.index" />
+        <x-sidebar-link-item label=" Request List" :status="in_array($activeRoute, ['request.index'])"
+            route="request.index" />
 
-        <x-nested-sidebar-item label="Request Maintenance" :status="in_array($activeRoute, ['category.index', 'request-type.index', 'request-type-status.index'])">
+        <x-nested-sidebar-item label="Request Maintenance"
+            :status="in_array($activeRoute, ['category.index', 'request-type.index', 'request-type-status.index'])">
             <x-sidebar-link-item label="Category" route="category.index" />
             <x-sidebar-link-item label="Request Type" route="request-type.index" />
             <x-sidebar-link-item label="Request Type Status" route="request-type-status.index" />
         </x-nested-sidebar-item>
 
-        <x-sidebar-link-item label="User Roles" route="user-role.index" :status="in_array($activeRoute, ['user-role.index'])" />
+        <x-nested-sidebar-item label="Maintenance">
+            <x-sidebar-link-item label="Position Maintenance" route="position.index"
+                :status="in_array($activeRoute, ['position.index'])" />
+            <x-sidebar-link-item label="User Roles" route="user-role.index"
+                :status="in_array($activeRoute, ['user-role.index'])" />
 
-        <x-sidebar-link-item label="Department" route="department.index" :status="in_array($activeRoute, ['department.index'])" />
+            <x-sidebar-link-item label="Department" route="department.index"
+                :status="in_array($activeRoute, ['department.index'])" />
 
         <x-sidebar-link-item label="User Management" route="user-management.index" :status="in_array($activeRoute, ['user-management.index', 'user-management.edit'])" />
+            
+        </x-nested-sidebar-item>
     </ul>
 </nav>

@@ -5,6 +5,8 @@ use App\Livewire\Pages\Category\CreateCategoryView;
 use App\Livewire\Pages\Department\CreateDepartmentView;
 use App\Livewire\Pages\Department\DepartmentView;
 use App\Livewire\Pages\Login\LogIn;
+use App\Livewire\Pages\Position\EditPosition;
+use App\Livewire\Pages\Position\PositionView;
 use App\Livewire\Pages\Request\CreateRequestView;
 use App\Livewire\Pages\Request\RequestView;
 use App\Livewire\Pages\RequestType\CreateRequestTypeView;
@@ -39,6 +41,11 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
         Route::get('index', RequestView::class)->name('index');
         Route::get('create', CreateRequestView::class)->name('create');
         Route::get('edit/{hash}', CreateRequestView::class)->name('edit');
+    });
+
+    Route::prefix('position')->as('position.')->group(function () {
+        Route::get('index', PositionView::class)->name('index');
+        Route::get('edit/{hash}', EditPosition::class)->name('edit-position');
     });
 
     Route::prefix('request-type')->as('request-type.')->group(function () {
