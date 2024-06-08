@@ -88,11 +88,11 @@
                                 style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;" @endif>
 
                                 <div data-tw-merge
-                                    class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-96 group-[.show]:mt-96 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px] text-center">
+                                    class="intro-y w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-80 group-[.show]:mt-80 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px] text-center">
                                     <div class="flex flex-col">
                                         <div class="items-center justify-center">
                                             <div class="text-lg font-bold rounded py-2 border-b bg-gray-300">Enter an
-                                                OTP: {{ $generatedOTP }}</div>
+                                                OTP:</div>
                                             <div class="justify-center mt-3">
                                                 <input type="text" wire:model='enteredOTP' name="" autofocus id=""
                                                     class="rounded-2xl border-solid border-border-2 text-center border-indigo-600 @error('OTP') border-2 border-rose-600 @enderror"
