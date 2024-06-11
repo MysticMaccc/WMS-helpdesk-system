@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Request;
 use App\Models\RequestType;
 use App\Models\RequestTypeStatus;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -44,7 +45,11 @@ class RequestListComponent extends Component
                 $query->where('category_id', 'LIKE', '%' . $this->category . '%');
             });
         }
-        $requestData = $query->where('is_active', 1)->paginate(7);
+        $requestData = $query->where('is_active', 1)
+            ->where('company_id', Auth::user()->company_id)
+            ->where('department_id', Auth::user()->department_id)
+            ->orderBy('id', 'desc')
+            ->paginate(7);
 
         $assignedPersonnelData = $requestData->filter(function ($item) {
             return !is_null($item->assigned_user_id);

@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\RequestType;
 
 use App\Models\RequestType;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,6 +16,8 @@ class RequestTypeListComponent extends Component
     public function render()
     {
         $requestTypeData = RequestType::where('is_active', 1)
+            ->where('company_id', Auth::user()->company_id)
+            ->where('department_id', Auth::user()->department_id)
             ->whereAny(
                 [
                     'name'

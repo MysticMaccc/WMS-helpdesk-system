@@ -33,7 +33,7 @@ class Company extends Model
 
     public function request()
     {
-        return $this->hasMany(Request::class,'company_id');
+        return $this->hasMany(Request::class,'company_id','id');
     }
 
     public function user()
@@ -44,6 +44,16 @@ class Company extends Model
     public function request_type()
     {
         return $this->hasMany(RequestType::class,'company_id');
+    }
+
+    public function category()
+    {
+        return $this->hasMany(Category::class,'company_id');
+    }
+
+    public function department()
+    {
+        return $this->hasMany(Department::class,'company_id');
     }
 
 }

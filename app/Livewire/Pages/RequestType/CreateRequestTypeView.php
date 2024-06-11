@@ -31,8 +31,8 @@ class CreateRequestTypeView extends Component
         if ($hash !== NULL) {
             $this->hash = $hash;
             $requestTypeData = RequestType::where('hash', $hash)->first();
-            if(!$requestTypeData){
-                abort(404,'Data do not exist!');
+            if (!$requestTypeData) {
+                abort(404, 'Data do not exist!');
             }
             $this->department = $requestTypeData->department_id;
             $this->category = $requestTypeData->category_id;
@@ -43,8 +43,8 @@ class CreateRequestTypeView extends Component
     #[Layout('layouts.app')]
     public function render()
     {
-        $departmentData = Department::where('is_active', 1)->get();
-        $categoryData = Category::where('is_active', 1)->get();
+        $departmentData = Department::where('is_active', 1)->where('company_id', Auth::user()->company_id)->get();
+        $categoryData = Category::where('is_active', 1)->where('company_id', Auth::user()->company_id)->get();
 
         return view('livewire.pages.request-type.create-request-type-view', compact('departmentData', 'categoryData'));
     }
@@ -59,7 +59,7 @@ class CreateRequestTypeView extends Component
             'name' => $this->name
         ]);
 
-        return $this->redirectRoute('request-type.index', navigate:true);
+        return $this->redirectRoute('request-type.index', navigate: true);
     }
 
     public function update()
@@ -71,13 +71,12 @@ class CreateRequestTypeView extends Component
             'name' => $this->name,
         ]);
 
-        return $this->redirectRoute('request-type.index', navigate:true);
+        return $this->redirectRoute('request-type.index', navigate: true);
     }
 
     public function destroy($hash)
     {
         $this->destroyResource(RequestType::class, $hash);
-        return $this->redirectRoute('request-type.index', navigate:true);
+        return $this->redirectRoute('request-type.index', navigate: true);
     }
-    
 }

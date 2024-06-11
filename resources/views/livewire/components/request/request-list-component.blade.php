@@ -26,7 +26,6 @@
             <x-TheadSelectOption :data="$departmentData" defaultOption="Department" wire:model.live="department"
                 class="w-36" />
         </x-th>
-        <x-th>Details</x-th>
         <x-th>Cost</x-th>
         <x-th>
             <x-TheadSelectOption :data="$assignedPersonnelData" defaultOption="Assigned To" wire:model.live="assignedTo"

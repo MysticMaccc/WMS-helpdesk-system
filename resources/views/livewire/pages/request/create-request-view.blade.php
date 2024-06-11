@@ -14,14 +14,52 @@
             <x-slot:form>
                 <div class="w-full">
                     <x-select-input wireModel="requestType" label="Select Request Type" :data="$requestTypeData"
-                        wire:model.live="requestType" />
+                        wire:model.live="requestType" disabledProp="{{ $disableRequestType }}" />
                 </div>
+
                 <div class="w-full">
-                    <x-text-area label="Enter Details" wireModel="details" wire:model="details" />
+                    <x-static-table>
+                        <x-slot:thead>
+                            <th class="px-6 py-3">Details</th>
+                            <th class="px-6 py-3">Cost</th>
+                            <th class="px-6 py-3">Action</th>
+                        </x-slot:thead>
+
+                        <x-slot:tbody>
+                            @foreach ($details as $index => $detail)
+                                <x-static-tr>
+                                    <td class="px-6 py-4 w-40">
+                                        <input type="text" class="py-1 w-40" wire:model="details.{{ $index }}"
+                                            {{ $hash !== null ? 'disabled' : '' }}>
+                                    </td>
+                                    <td class="px-6 py-4 w-20">
+                                        @if ($hash != null)
+                                            <input type="text" class="py-1 w-20"
+                                                wire:model="cost.{{ $index }}">
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        @if ($hash == null)
+                                            <button type="button"
+                                                class="px-2 py-1 text-xs text-stone-100 bg-red-700 rounded-lg"
+                                                wire:click="removeRow({{ $index }})">Remove</button>
+                                        @endif
+                                    </td>
+                                </x-static-tr>
+                            @endforeach
+                        </x-slot:tbody>
+                        <x-static-tr>
+                            @if ($hash == null)
+                                <td colspan="3" class="py-1">
+                                    <x-button type="button" class="float-end text-xs px-1 py-1"
+                                        wire:click="addRow()">Add
+                                        Row</x-button>
+                                </td>
+                            @endif
+                        </x-static-tr>
+                    </x-static-table>
                 </div>
-                <div class="w-full">
-                    <x-input label="Enter Cost" wireModel="cost" wire:model="cost" />
-                </div>
+
                 @if ($hash != null)
                     @if ($requestData->status_id == 3)
                         <div class="w-full">
@@ -49,38 +87,9 @@
     </div>
 
     <div class="flex flex-col gap-4 col-span-1 md:col-start-6 md:col-span-4 lg:col-start-7 lg:col-span-6">
-        <x-card title="History" class="basis-full">
-            @if ($hash != null)
-                <p class="mt-2 font-semibold">
-                    <label class="text-sm font-semibold">Created By:</label>
-                    <small class="text-xs italic">
-                        {{ $requestData->user->full_name }}
-                        {{ $requestData->created_at }}
-                    </small>
-                </p>
-                <hr />
-                @foreach ($requestData->request_update_log as $item)
-                    <p class="mt-2 font-semibold">
-                        <label class="text-sm">{{ $item->status->name }} By: </label>
-                        <small class="text-xs italic">
-                            {{ $item->modified_by }}
-                            {{ $item->created_at }}
-                        </small>
-                    </p>
-                    <hr />
-                @endforeach
-            @else
-                <p class="text-danger font-bold text-xl">No history to show...</p>
-            @endif
-        </x-card>
 
-        <x-card title="Attachments" class="basis-full">
-            @if ($hash != null)
-                <livewire:components.request.attachment-list-component :data="$requestData" />
-            @else
-                <p class="text-danger font-bold text-xl">No attachments to show...</p>
-            @endif
-        </x-card>
+        <livewire:components.request.history-card-component :hash="$hash" :data="$requestData" />
+        <livewire:components.request.attachment-card-component :data="$requestData" />
 
     </div>
 

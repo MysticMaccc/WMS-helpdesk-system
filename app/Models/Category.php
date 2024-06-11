@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Category extends Model
 {
@@ -17,6 +18,7 @@ class Category extends Model
             $lastId = $model::orderBy('id', 'DESC')->first();
             $hash_id = $lastId != NULL ? encrypt($lastId->id + 1) : encrypt(1);
             $model->hash = $hash_id;
+            $model->company_id = Auth::user()->company_id;
             $model->modified_by = 'system';
         });
 
@@ -29,5 +31,10 @@ class Category extends Model
     public function request_type()
     {
         return $this->belongsTo(RequestType::class, 'category_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class,'company_id');
     }
 }
