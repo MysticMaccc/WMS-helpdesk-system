@@ -10,6 +10,7 @@ class Request extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'company_id',
         'department_id',
         'request_type_id',
         'user_id',
@@ -30,15 +31,19 @@ class Request extends Model
             $lastId = $model::orderBy('id', 'DESC')->first();
             $hash_id = $lastId != NULL ? encrypt($lastId->id + 1) : encrypt(1);
             $model->hash = $hash_id;
-            $model->company_id = Auth::user()->company_id;
             $model->modified_by = Auth::user()->full_name;
         });
     }
 
     // relationship
+    public function request_detail()
+    {
+        return $this->hasMany(RequestDetail::class,'reference_number','reference_number');
+    }
+
     public function company()
     {
-        return $this->belongsTo(Company::class,'company_id');
+        return $this->belongsTo(Company::class,'company_id','id');
     }
 
     public function attachment()

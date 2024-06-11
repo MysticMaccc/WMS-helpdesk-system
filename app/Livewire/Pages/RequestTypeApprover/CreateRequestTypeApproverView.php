@@ -7,6 +7,7 @@ use App\Models\RequestTypeApprover;
 use App\Models\RequestTypeStatus;
 use App\Models\User;
 use App\ResourcesTrait;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -43,7 +44,7 @@ class CreateRequestTypeApproverView extends Component
     #[Layout('layouts.app')]
     public function render()
     {
-        $userData = User::where('is_active', true)->orderBy('firstname', 'asc')->get();
+        $userData = User::where('is_active', true)->where('company_id', Auth::user()->company_id)->orderBy('firstname', 'asc')->get();
         $requestTypeStatusData = RequestTypeStatus::where('is_active', 1)->orderBy('id', 'asc')->get();
 
         return view('livewire.pages.request-type-approver.create-request-type-approver-view', compact('userData', 'requestTypeStatusData'));

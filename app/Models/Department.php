@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Department extends Model
 {
@@ -19,6 +20,7 @@ class Department extends Model
             $hash_id = $lastId != NULL ? encrypt($lastId->id + 1) : encrypt(1);
             $model->hash = $hash_id;
             $model->is_active = 1;
+            $model->company_id = Auth::user()->company_id;
             $model->modified_by = 'system';
         });
 
@@ -40,5 +42,10 @@ class Department extends Model
     public function request_type()
     {
         return $this->hasMany(RequestType::class, 'department_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class,'company_id');
     }
 }

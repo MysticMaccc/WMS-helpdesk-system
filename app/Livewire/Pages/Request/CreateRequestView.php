@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Request;
 use App\Models\Attachment;
 use App\Models\Notification;
 use App\Models\Request;
+use App\Models\RequestDetail;
 use App\Models\RequestType;
 use App\Models\RequestTypeApprover;
 use App\Models\RequestUpdateLog;
@@ -30,15 +31,16 @@ class CreateRequestView extends Component
     public $hash;
     public $nextStatusData;
     public $requestData;
+    public $disableRequestType = false;
     #[Validate([
         'requestType' => 'required',
-        'details' => 'required|min:10|max:500',
-        'cost' => 'nullable|numeric',
+        'details.*' => 'required|min:5|max:500',
         'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf|max:2048',
     ])]
     public $requestType;
-    public $details;
-    public $cost;
+    public $details = [];
+    public $cost = [];
+    public $detailId = [];
     public $assignTo;
     public $attachments = [];
 
@@ -47,6 +49,8 @@ class CreateRequestView extends Component
         if ($hash != null) {
             $this->hash = $hash;
             $this->requestData = Request::where('hash', $this->hash)->where('is_active', true)->first();
+            $detailData = RequestDetail::where('reference_number', $this->requestData->reference_number)->orderBy('id', 'asc')->get();
+
             if (!$this->requestData) {
                 abort(404);
             }
@@ -54,13 +58,24 @@ class CreateRequestView extends Component
             $this->nextStatusData = $this->requestData->request_type->request_type_approver
                 ->where('request_type_status_id', '>', $this->requestData->status_id)->first();
             //end of properties for updating
-
+            $this->disableRequestType = true;
             $this->subTitle = "Reference No.";
             $this->description =  $this->requestData->reference_number;
             $this->title = $this->requestData->status->name;
             $this->requestType = $this->requestData->request_type_id;
             $this->details = $this->requestData->details;
             $this->cost = $this->requestData->cost;
+
+            if ($detailData) {
+                foreach ($detailData as $detail) {
+                    $this->details[] = $detail->details;
+                    $this->cost[] = $detail->cost;
+                    $this->detailId[] = $detail->id;
+                }
+            }
+        } else {
+            // Initialize with one empty row
+            $this->addRow();
         }
     }
 
@@ -68,12 +83,28 @@ class CreateRequestView extends Component
     public function render()
     {
         $requestTypeData = RequestType::where('department_id', Auth::user()->department_id)
+            ->where('company_id', Auth::user()->company_id)
             ->where('is_active', true)
             ->whereHas('request_type_approver')
             ->get();
 
         $userData = User::where('is_active', 1)->orderBy('firstname', 'asc')->get();
         return view('livewire.pages.request.create-request-view', compact('requestTypeData', 'userData'));
+    }
+
+    public function addRow()
+    {
+        $this->details[] = '';
+        $this->cost[] = '';
+    }
+
+    public function removeRow($index)
+    {
+        unset($this->details[$index]);
+        unset($this->cost[$index]);
+
+        $this->details = array_values($this->details);
+        $this->cost = array_values($this->cost);
     }
 
     public function updatedRequestType($value)
@@ -90,6 +121,7 @@ class CreateRequestView extends Component
 
         DB::transaction(
             function () {
+
                 $statusId = RequestTypeApprover::where('request_type_id', $this->requestType)
                     ->where('level', 1)
                     ->first();
@@ -107,16 +139,27 @@ class CreateRequestView extends Component
                 }
 
                 $attributes = [
+                    'company_id' => Auth::user()->company_id,
                     'department_id' => Auth::user()->department_id,
                     'request_type_id' => $this->requestType,
                     'user_id' => Auth::user()->id,
                     'reference_number' => $referenceNumber,
-                    'details' => $this->details,
-                    'cost' => $this->cost,
                     'status_id' => $statusId->request_type_status_id
                 ];
+
+                //store queries
                 $this->storeResource(Request::class, $attributes);
+
+                foreach ($this->details as $index => $detail) {
+                    $this->storeResource(RequestDetail::class, [
+                        'reference_number' => $referenceNumber,
+                        'details' => $detail,
+                    ]);
+                }
+
                 $this->storeNotification($this->nextStatusData->user_id, 'New Request Created', $referenceNumber, 'request.index');
+                //store queries end
+
             },
             3
         );
@@ -181,4 +224,5 @@ class CreateRequestView extends Component
             'parameter' => $parameter
         ]);
     }
+    
 }

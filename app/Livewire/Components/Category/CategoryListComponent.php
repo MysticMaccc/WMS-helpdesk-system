@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Category;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,6 +16,7 @@ class CategoryListComponent extends Component
     public function render()
     {
         $categoryData = Category::where('is_active', true)
+        ->where('company_id', Auth::user()->company_id)
         ->where(function($query){
             $query->where('name','LIKE','%'.$this->search.'%');
         })
