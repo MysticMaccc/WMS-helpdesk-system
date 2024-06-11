@@ -150,6 +150,7 @@ class RequestTypeSeeder extends Seeder
         foreach ($data as $index => [$department,$category,$name]) {
             RequestType::create([
                 'hash' => encrypt($index),
+                'company_id' => 1,
                 'department_id' => $department,
                 'category_id' => $category,
                 'name' => $name,

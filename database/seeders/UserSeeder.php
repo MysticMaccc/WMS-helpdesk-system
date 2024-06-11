@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
 use App\Models\Department;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
         User::create([
             'hash' => encrypt(1),
             'department_id' => Department::pluck('id')->random(),
+            'company_id' => 1,
             'firstname' => 'System',
             'middlename' => 'Development',
             'lastname' => 'Team',
@@ -34,9 +36,10 @@ class UserSeeder extends Seeder
         ]);
         // it super admin end
 
-        for ($x = 2; $x <= 35; $x++) {
+        for ($x = 2; $x <= 10; $x++) {
             User::create([
                 'hash' => encrypt($x),
+                'company_id' => Company::pluck('id')->random(),
                 'department_id' => Department::pluck('id')->random(),
                 'firstname' => fake()->unique()->word,
                 'middlename' => fake()->unique()->word,

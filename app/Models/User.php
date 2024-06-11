@@ -87,6 +87,11 @@ class User extends Authenticatable
     }
 
     // relationships
+    public function company()
+    {
+        return $this->belongsTo(Company::class,'company_id');
+    }
+
     public function position()
     {
         return $this->belongsTo(Position::class, 'position_id');

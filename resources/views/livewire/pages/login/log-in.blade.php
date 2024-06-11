@@ -92,7 +92,7 @@
                                     <div class="flex flex-col">
                                         <div class="items-center justify-center">
                                             <div class="text-lg font-bold rounded py-2 border-b bg-gray-300">Enter an
-                                                OTP:</div>
+                                                OTP: {{ $this->generatedOTP }}</div>
                                             <div class="justify-center mt-3">
                                                 <input type="text" wire:model='enteredOTP' name="" autofocus id=""
                                                     class="rounded-2xl border-solid border-border-2 text-center border-indigo-600 @error('OTP') border-2 border-rose-600 @enderror"

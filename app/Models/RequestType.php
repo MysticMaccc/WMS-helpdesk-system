@@ -46,6 +46,11 @@ class RequestType extends Model
         return $this->hasMany(Request::class,'request_type_id','id');
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class,'company_id');
+    }
+
     // scope
     public function scopeIsActive($query)
     {

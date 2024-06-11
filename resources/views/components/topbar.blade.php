@@ -36,6 +36,7 @@
                     class="dropdown-content rounded-md border-transparent p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 mt-px w-56 bg-theme-1 text-white">
                     <div class="p-2 font-medium font-normal">
                         <div class="font-medium">{{ Auth::user()->full_name }}</div>
+                        <p class="text-xs">{{ Auth::user()->department->name }}</p>
                         {{-- <div class="mt-0.5 text-xs text-white/70 dark:text-slate-500">
                             Software Engineer
                         </div> --}}
