@@ -30,12 +30,17 @@ class Request extends Model
             $lastId = $model::orderBy('id', 'DESC')->first();
             $hash_id = $lastId != NULL ? encrypt($lastId->id + 1) : encrypt(1);
             $model->hash = $hash_id;
+            $model->company_id = Auth::user()->company_id;
             $model->modified_by = Auth::user()->full_name;
         });
-
     }
 
     // relationship
+    public function company()
+    {
+        return $this->belongsTo(Company::class,'company_id');
+    }
+
     public function attachment()
     {
         return $this->hasMany(Attachment::class, 'reference_number');
