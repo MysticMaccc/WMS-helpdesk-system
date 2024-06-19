@@ -3,6 +3,8 @@
 use App\Livewire\Components\UserManagement\UserCrudComponent;
 use App\Livewire\Pages\Category\CategoryView;
 use App\Livewire\Pages\Category\CreateCategoryView;
+use App\Livewire\Pages\Company\CompanyView;
+use App\Livewire\Pages\Company\CreateCompanyView;
 use App\Livewire\Pages\Department\CreateDepartmentView;
 use App\Livewire\Pages\Department\DepartmentView;
 use App\Livewire\Pages\Login\LogIn;
@@ -97,5 +99,11 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
         Route::get('index', DepartmentView::class)->name('index');
         Route::get('create', CreateDepartmentView::class)->name('create');
         Route::get('edit/{hash}', CreateDepartmentView::class)->name('edit');
+    });
+
+    Route::prefix('company')->as('company.')->group(function () {
+        Route::get('index', CompanyView::class)->name('index');
+        Route::get('create', CreateCompanyView::class)->name('create');
+        Route::get('edit/{hash}', CreateCompanyView::class)->name('edit');
     });
 });
