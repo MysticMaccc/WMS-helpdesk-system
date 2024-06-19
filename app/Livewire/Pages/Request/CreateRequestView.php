@@ -195,7 +195,15 @@ class CreateRequestView extends Component
                 ];
             }
 
+            // update queries
             $this->storeResource(RequestUpdateLog::class, $requestLogAttributes);
+            if ($this->requestData->status_id == 1) { //approve
+                foreach ($this->details as $index => $detail) {
+                    $this->updateResourceUsingId(RequestDetail::class, $this->detailId[$index], [
+                        'cost' => $this->cost[$index]
+                    ]);
+                }
+            }
             $this->updateResource(Request::class, $requestAttributes);
             $this->storeNotification(
                 $this->nextStatusData->user_id,
@@ -204,6 +212,8 @@ class CreateRequestView extends Component
                 'request.edit',
                 $this->requestData->hash
             );
+            // update queries end
+
         });
 
         if (!$transaction) {
@@ -224,5 +234,4 @@ class CreateRequestView extends Component
             'parameter' => $parameter
         ]);
     }
-    
 }

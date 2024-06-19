@@ -43,6 +43,28 @@ trait ResourcesTrait
         }
     }
 
+    public function updateResourceUsingId($modelClassName, $id, array $attributes)
+    {
+        try {
+            $instance = $modelClassName::where('id', $id)->first();
+            if (!$instance) {
+                session()->flash('error', 'Data do not exist!');
+                return;
+            }
+
+            $update = $instance->update($attributes);
+
+            if (!$update) {
+                session()->flash('error', 'Updating data failed!');
+                return;
+            }
+
+            session()->flash('success', 'Updating data successful!');
+        } catch (Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+    }
+
     public function destroyResource($modelClassName, $hashValue)
     {
         try {
