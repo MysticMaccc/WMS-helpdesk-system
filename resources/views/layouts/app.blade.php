@@ -34,7 +34,8 @@
 <body>
 
     <div
-        class="rubick px-5 sm:px-8 py-5 before:content-[''] before:bg-gradient-to-b before:from-theme-1 before:to-theme-2 dark:before:from-darkmode-800 dark:before:to-darkmode-800 before:fixed before:inset-0 before:z-[-1]">
+        class="rubick px-5 sm:px-8 py-5 before:content-[''] before:bg-gradient-to-b before:from-sky-500 before:to-sky-600 
+        dark:before:from-darkmode-800 dark:before:to-darkmode-800 before:fixed before:inset-0 before:z-[-1]">
         <!-- BEGIN: Mobile Menu -->
         <div
             class="mobile-menu group top-0 inset-x-0 fixed bg-theme-1/90 z-[60] border-b border-white/[0.08] dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0 [&.mobile-menu--active]:before:visible [&.mobile-menu--active]:before:opacity-100">
@@ -114,7 +115,7 @@
     <script src="{{ asset('dist/js/components/mobile-menu.js') }}"></script>
     <script src="{{ asset('dist/js/components/themes/rubick/top-bar.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/preview-component.js') }}"></script>
-    <script src="{{ asset('dist/js/vendors/tab.js')}}"></script>
+    <script src="{{ asset('dist/js/vendors/tab.js') }}"></script>
 
     <!-- END: Vendor JS Assets-->
 </body>

@@ -89,7 +89,7 @@ class User extends Authenticatable
     // relationships
     public function company()
     {
-        return $this->belongsTo(Company::class,'company_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function position()
@@ -104,7 +104,7 @@ class User extends Authenticatable
 
     public function user_type()
     {
-        return $this->belongsTo(User::class, 'user_type_id');
+        return $this->belongsTo(UserType::class, 'user_type_id');
     }
 
     public function user_role()

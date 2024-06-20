@@ -1,10 +1,10 @@
 @props(['label', 'status' => 'null'])
 <li x-data="{ open: false }">
-    <a class="side-menu {{ $status ? 'side-menu--active' : '' }} @click=" open=!open">
+    <a class="hover:bg-sky-800 side-menu {{ $status ? 'side-menu--active' : '' }} @click=" open=!open">
         <div class="side-menu__icon">
-            {{$icon}}
+            {{ $icon }}
         </div>
-        <div class="side-menu__title">
+        <div class="side-menu__title text-stone-100">
             {{ $label }}
             <div class="side-menu__sub-icon">
                 <i :class="{ 'rotate-180': open }" data-tw-merge="" data-lucide="chevron-down"
