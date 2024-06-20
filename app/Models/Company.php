@@ -21,6 +21,7 @@ class Company extends Model
         'expired_at',
     ];
 
+    // static
     public static function boot()
     {
         parent::boot();
@@ -38,6 +39,12 @@ class Company extends Model
         });
     }
 
+    public static function getAllCompany()
+    {
+        return static::where('is_active', 1)->orderBy('name', 'asc')->get();
+    }
+
+    // relationships
     public function request()
     {
         return $this->hasMany(Request::class, 'company_id', 'id');

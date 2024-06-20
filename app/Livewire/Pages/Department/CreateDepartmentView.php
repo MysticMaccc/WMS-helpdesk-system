@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Pages\Department;
 
+use App\Models\Company;
 use App\Models\Department;
 use App\Models\User;
 use App\ResourcesTrait;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -18,9 +20,11 @@ class CreateDepartmentView extends Component
     #[Validate([
         'user_id' => 'required',
         'department' => 'required|min:2',
+        'company' => 'required',
     ])]
     public $department;
     public $user_id;
+    public $company;
 
     public function mount($hash = null)
     {
@@ -33,25 +37,41 @@ class CreateDepartmentView extends Component
             $this->department = $departmentData->name;
             $this->user_id = $departmentData->user_id;
         }
-
-        $this->users = User::where('is_active', 1)->get();
     }
     public function store()
     {
-        $this->validate();
+        if (Auth::user()->user_type_id != 1) {
+            $this->validate([
+                'user_id' => 'required',
+                'department' => 'required|min:2',
+            ]);
+        } else {
+            $this->validate();
+        }
+
         $this->storeResource(Department::class, [
             'user_id' => $this->user_id,
             'name' => $this->department,
+            'company_id' => Auth::user()->user_type_id == 1 ?  $this->company : Auth::user()->company_id,
         ]);
         return $this->redirectRoute('department.index', navigate: true);
     }
 
     public function update()
     {
-        $this->validate();
+        if (Auth::user()->user_type_id != 1) {
+            $this->validate([
+                'user_id' => 'required',
+                'department' => 'required|min:2',
+            ]);
+        } else {
+            $this->validate();
+        }
+
         $this->updateResource(Department::class, [
             'user_id' => $this->user_id,
             'name' => $this->department,
+            'company_id' => Auth::user()->user_type_id == 1 ?  $this->company : Auth::user()->company_id,
         ]);
         return $this->redirectRoute('department.index', navigate: true);
     }
@@ -65,6 +85,9 @@ class CreateDepartmentView extends Component
     #[Layout('layouts.app')]
     public function render()
     {
-        return view('livewire.pages.department.create-department-view');
+        $companyData = Company::getAllCompany();
+        $usersData = User::getUserForDropdown();
+
+        return view('livewire.pages.department.create-department-view', compact('companyData', 'usersData'));
     }
 }

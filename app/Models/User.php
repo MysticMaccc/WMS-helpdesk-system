@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -73,6 +74,7 @@ class User extends Authenticatable
         ];
     }
 
+    // static
     protected static function boot()
     {
         parent::boot();
@@ -84,6 +86,16 @@ class User extends Authenticatable
             $model->is_active = 1;
             $model->modified_by = 'system';
         });
+    }
+
+    public static function getUserForDropdown()
+    {
+        $query = static::where('is_active', 1);
+        if (Auth::user()->user_type_id != 1) {
+            $query->where('company_id', Auth::user()->company_id);
+        }
+        $userData = $query->orderBy('firstname', 'asc')->get();
+        return $userData;
     }
 
     // relationships

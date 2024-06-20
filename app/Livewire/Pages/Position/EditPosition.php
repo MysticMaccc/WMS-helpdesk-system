@@ -56,7 +56,14 @@ class EditPosition extends Component
 
     public function update()
     {
-        $this->validate();
+        if (Auth::user()->user_type_id != 1) {
+            $this->validate([
+                'position' => 'required|min:2',
+            ]);
+        } else {
+            $this->validate();
+        }
+
         $data = [
             'name' => $this->position,
             'company_id' => Auth::user()->user_type_id == 1 ?  $this->company : Auth::user()->company_id,

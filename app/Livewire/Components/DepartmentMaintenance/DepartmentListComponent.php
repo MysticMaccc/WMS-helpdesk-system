@@ -15,11 +15,8 @@ class DepartmentListComponent extends Component
 
     public function render()
     {
-        $departmentData = Department::where('company_id', Auth::user()->company_id)
-            ->where('is_active', 1)->where(function ($query) {
-                $query->where('name', 'LIKE', '%' . $this->search . '%');
-            })
-            ->orderBy('name', 'asc')->paginate(10);
+        $departmentData = Department::getAllDepartment($this->search);
+
         return view(
             'livewire.components.department-maintenance.department-list-component',
             [

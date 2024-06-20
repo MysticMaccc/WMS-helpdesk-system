@@ -10,7 +10,7 @@ class Department extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'hash', 'name', 'is_active', 'modified_by'];
+    protected $fillable = ['user_id', 'company_id', 'hash', 'name', 'is_active', 'modified_by'];
 
     protected static function boot()
     {
@@ -20,13 +20,27 @@ class Department extends Model
             $hash_id = $lastId != NULL ? encrypt($lastId->id + 1) : encrypt(1);
             $model->hash = $hash_id;
             $model->is_active = 1;
-            $model->company_id = Auth::user()->company_id;
             $model->modified_by = 'system';
         });
 
         static::updating(function ($model) {
             $model->modified_by = 'system';
         });
+    }
+
+    // static methods
+    public static function getAllDepartment($search)
+    {
+        $query = static::where('is_active', 1)->where(function ($query) use ($search) {
+            $query->where('name', 'LIKE', '%' . $search . '%');
+        });
+
+        if (Auth::user()->user_type_id != 1) {
+            $query->where('company_id', Auth::user()->company_id);
+        }
+
+        $departmentData = $query->orderBy('name', 'asc')->paginate(7);
+        return $departmentData;
     }
     // relationships
     public function user()
@@ -46,6 +60,6 @@ class Department extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class,'company_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 }
