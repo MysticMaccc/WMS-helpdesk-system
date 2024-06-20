@@ -63,6 +63,11 @@ class Company extends Model
         return $this->hasMany(Department::class, 'company_id');
     }
 
+    public function position()
+    {
+        return $this->hasMany(Position::class, 'company_id');
+    }
+
     // ACESSOR
     public function getSubscriptionAttribute()
     {

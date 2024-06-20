@@ -8,7 +8,7 @@
     <h2 class="intro-y mt-10 text-lg font-medium">{{ $title }}</h2>
     <div class="mt-10 grid grid-cols-12 gap-6">
         <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap">
-            <a href="{{route('position.create')}}"
+            <a href="{{ route('position.create') }}"
                 class="transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:rotate-2 hover:scale-110 hover:bg-indigo-500 duration-300
                          border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-2 shadow-md">Add
                 New Position</a>
@@ -58,45 +58,52 @@
                 <x-position-table-header />
                 <tbody>
                     @foreach ($positions as $index => $item)
-                    <tr data-tw-merge="" class="intro-x">
-                        <td data-tw-merge=""
-                            class="px-5 py-3 border-b dark:border-darkmode-300 box w-40 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                            <div class="flex">
-                                {{ $index + 1 }}
-                            </div>
-                        </td>
-                        <td data-tw-merge=""
-                            class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                            <a class="whitespace-nowrap font-medium" href="">
-                                {{ $item->name }}
-                            </a>
-                            <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                Modified By: {{ $item->modified_by }}
-                            </div>
-                        </td>
-                        <td data-tw-merge=""
-                            class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
-                            <div class="flex items-center justify-center">
-                                <a class="mr-3 flex cursor-pointer items-center"
-                                    href="{{route('position.edit-position', ['hash' => $item->hash])}}">
-                                    <i data-tw-merge="" data-lucide="check-square" class="stroke-1.5 mr-1 h-4 w-4"></i>
-                                    Edit
+                        <tr data-tw-merge="" class="intro-x">
+                            <td data-tw-merge=""
+                                class="px-5 py-3 border-b dark:border-darkmode-300 box w-40 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
+                                <div class="flex">
+                                    {{ $index + 1 }}
+                                </div>
+                            </td>
+                            <td data-tw-merge=""
+                                class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
+                                <a class="whitespace-nowrap font-medium" href="">
+                                    {{ $item->name }}
                                 </a>
-                                {{-- <a class="flex items-center text-danger" x-click=""
+                                <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                                    Modified By: {{ $item->modified_by }}
+                                </div>
+                            </td>
+                            <td data-tw-merge=""
+                                class="px-5 py-3 border-b dark:border-darkmode-300 box w-40 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
+                                <div class="flex">
+                                    {{ $item->company->name }}
+                                </div>
+                            </td>
+                            <td data-tw-merge=""
+                                class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
+                                <div class="flex items-center justify-center">
+                                    <a class="mr-3 flex cursor-pointer items-center"
+                                        href="{{ route('position.edit-position', ['hash' => $item->hash]) }}">
+                                        <i data-tw-merge="" data-lucide="check-square"
+                                            class="stroke-1.5 mr-1 h-4 w-4"></i>
+                                        Edit
+                                    </a>
+                                    {{-- <a class="flex items-center text-danger" x-click=""
                                     wire:click="deletePosition({{$item->id}})" href="#">
                                     <i data-tw-merge="" data-lucide="trash" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                     Delete
                                 </a> --}}
-                            </div>
-                        </td>
-                    </tr>
+                                </div>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
         <!-- END: Data List -->
     </div>
-    <div x-data="{notification:false}">
+    <div x-data="{ notification: false }">
         <div x-show="notification" class="text-center">
             <!-- BEGIN: Notification Content -->
             <div id="basic-non-sticky-notification-content"

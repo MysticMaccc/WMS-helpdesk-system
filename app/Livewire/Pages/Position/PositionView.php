@@ -12,14 +12,13 @@ class PositionView extends Component
 {
     use WithPagination;
     public $newposition = null;
-    public $actionMessage = true;   
+    public $actionMessage = true;
     public $title = "Position Maintenance";
     #[Layout('layouts.app')]
     public function render()
     {
         $positions = positions::getAllPositions();
         return view('livewire.pages.position.position-view', compact('positions'));
-
     }
 
     public function destroyRequestMessage()
