@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\UserManagement;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,11 +15,12 @@ class UserListComponent extends Component
 
     public function render()
     {
-        $userData = User::whereAny([
-            'firstname',
-            'email',
-            'lastname',
-        ], 'LIKE', '%' . $this->search . '%')->orderBy('firstname', 'asc')
+        $userData = User::where('company_id', Auth::user()->company_id)
+            ->whereAny([
+                'firstname',
+                'email',
+                'lastname',
+            ], 'LIKE', '%' . $this->search . '%')->orderBy('firstname', 'asc')
             ->paginate(16);
 
         return view(

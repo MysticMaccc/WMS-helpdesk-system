@@ -29,33 +29,35 @@ class LogIn extends Component
 
     #[Layout('layouts.guest')]
 
-    public function submitOTP(){
+    public function submitOTP()
+    {
         if ($this->enteredOTP == $this->generatedOTP) {
             Auth::attempt(['email' => $this->email, 'password' => $this->password]);
             $user = Auth::user();
             // Store authenticated user in session
             session(['Authenticated' => $user]);
             return redirect()->route('dashboard');
-        }else{
+        } else {
             $this->addError('OTP', 'Invalid OTP.');
         }
     }
-    
-    public function logInAuthenticate() {
+
+    public function logInAuthenticate()
+    {
         $user = User::where('email', $this->email)->first();
 
         if ($user != null) {
             $passwordVerified = password_verify($this->password, $user->password);
-            
+
             if ($passwordVerified) {
                 $userEmail = $user->email;
                 $this->generatedOTP = rand(0, 999999);
                 Mail::to($userEmail)->send(new sendOTPAuthenticateMail($userEmail, $this->generatedOTP));
                 $this->showModal = true;
-            }else{
+            } else {
                 $this->addError('password', 'Invalid password.');
             }
-        }else {
+        } else {
             $this->addError('invalidCredentials', 'Oops.. Credentials not found on our end.');
         }
     }
