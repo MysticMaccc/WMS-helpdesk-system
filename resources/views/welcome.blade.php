@@ -45,7 +45,8 @@
             @else
                 <a href="{{ route('login') }}"
                     class="rounded-full bg-sky-700 text-slate-100 text-xl px-28 py-2 shadow-xl shadow-gray-600 no-underline
-                             hover:bg-sky-900 hover:text-slate-50 hover:shadow-gray-900">
+                             hover:bg-sky-900 hover:text-slate-50 hover:shadow-gray-900 
+                             hover:animate-wiggle hover:animate-once hover:animate-ease-in-out">
                     Login
                 </a>
             @endauth

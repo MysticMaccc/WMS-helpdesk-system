@@ -5,6 +5,7 @@ use App\Livewire\Pages\Category\CategoryView;
 use App\Livewire\Pages\Category\CreateCategoryView;
 use App\Livewire\Pages\Company\CompanyView;
 use App\Livewire\Pages\Company\CreateCompanyView;
+use App\Livewire\Pages\Dashboard\DashboardView;
 use App\Livewire\Pages\Department\CreateDepartmentView;
 use App\Livewire\Pages\Department\DepartmentView;
 use App\Livewire\Pages\Login\LogIn;
@@ -24,6 +25,7 @@ use App\Livewire\Pages\UserType\UserTypeCreate;
 use App\Livewire\Pages\UserType\UserTypeEdit;
 use App\Livewire\Pages\UserType\UserTypeView;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,6 +44,10 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::prefix('dashboard')->as('dashboard.')->group(function () {
+        Route::get('index', DashboardView::class)->name('index');
+    });
 
     Route::prefix('request')->as('request.')->group(function () {
         Route::get('index', RequestView::class)->name('index');

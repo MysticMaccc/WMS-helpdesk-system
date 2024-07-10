@@ -15,13 +15,7 @@ class UserListComponent extends Component
 
     public function render()
     {
-        $userData = User::where('company_id', Auth::user()->company_id)
-            ->whereAny([
-                'firstname',
-                'email',
-                'lastname',
-            ], 'LIKE', '%' . $this->search . '%')->orderBy('firstname', 'asc')
-            ->paginate(16);
+        $userData = User::getAllUser($this->search);
 
         return view(
             'livewire.components.user-management.user-list-component',

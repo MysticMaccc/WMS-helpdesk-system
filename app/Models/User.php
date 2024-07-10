@@ -98,6 +98,21 @@ class User extends Authenticatable
         return $userData;
     }
 
+    public static function getAllUser($search)
+    {
+        $query = static::whereAny([
+            'firstname',
+            'email',
+            'lastname',
+        ], 'LIKE', '%' . $search . '%')->orderBy('firstname', 'asc');
+
+        if (Auth::user()->user_type_id != 1) {
+            $query->where('company_id', Auth::user()->company_id);
+        }
+        $userData = $query->orderBy('firstname', 'ASC')->paginate(6);
+        return $userData;
+    }
+
     // relationships
     public function company()
     {
