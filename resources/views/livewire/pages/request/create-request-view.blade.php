@@ -7,7 +7,7 @@
             <x-slot:description>
                 {{ $description }}
                 @if ($hash != null)
-                    {{ $nextStatusData != null ? '<p>Approver:' . $nextStatusData->approver->full_name . '</p>' : '' }}
+                    {!! $nextStatusData != null ? '<p>Approver:' . $nextStatusData->approver->full_name . '</p>' : '' !!}
                 @endif
             </x-slot:description>
 
