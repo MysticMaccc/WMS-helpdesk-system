@@ -16,7 +16,7 @@
         <!-- END: Breadcrumb -->
 
         <!-- BEGIN: Notifications -->
-        <livewire:system.notification.notification-list-component />
+        {{-- <livewire:system.notification.notification-list-component /> --}}
         <!-- END: Notifications  -->
         <!-- BEGIN: Account Menu -->
         <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-toggle="dropdown"
@@ -34,14 +34,14 @@
                 class="dropdown-menu absolute z-[9999] hidden">
                 <div data-tw-merge=""
                     class="dropdown-content rounded-md border-transparent p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 mt-px w-56 bg-theme-1 text-white">
-                    <div class="p-2 font-medium font-normal">
+                    <div class="p-2 font-medium ">
                         <div class="font-medium">{{ Auth::user()->full_name }}</div>
                         <p class="text-xs">{{ Auth::user()->department->name }}</p>
                         {{-- <div class="mt-0.5 text-xs text-white/70 dark:text-slate-500">
                             Software Engineer
                         </div> --}}
                     </div>
-                    <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400 bg-white/[0.08]">
+                    <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400 ">
                     </div>
                     <a
                         class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md  

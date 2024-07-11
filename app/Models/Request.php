@@ -38,12 +38,12 @@ class Request extends Model
     // relationship
     public function request_detail()
     {
-        return $this->hasMany(RequestDetail::class,'reference_number','reference_number');
+        return $this->hasMany(RequestDetail::class, 'reference_number', 'reference_number');
     }
 
     public function company()
     {
-        return $this->belongsTo(Company::class,'company_id','id');
+        return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
     public function attachment()
@@ -58,33 +58,33 @@ class Request extends Model
 
     public function request_type()
     {
-        return $this->belongsTo(RequestType::class,'request_type_id','id');
+        return $this->belongsTo(RequestType::class, 'request_type_id', 'id');
     }
 
     public function department()
     {
-        return $this->belongsTo(Department::class,'department_id','id');
+        return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 
     public function request_update_log()
     {
-        return $this->hasMany(RequestUpdateLog::class,'request_id');
+        return $this->hasMany(RequestUpdateLog::class, 'request_id', 'id');
     }
 
 
     public function assigned_to()
     {
-        return $this->belongsTo(User::class,'assigned_user_id');
+        return $this->belongsTo(User::class, 'assigned_user_id');
     }
 
     public function notification()
     {
-        return $this->hasMany(Notification::class,'description','reference_number');
+        return $this->hasMany(Notification::class, 'description', 'reference_number');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // ACCESSOR

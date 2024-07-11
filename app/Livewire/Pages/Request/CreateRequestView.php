@@ -40,6 +40,7 @@ class CreateRequestView extends Component
     public $requestType;
     public $details = [];
     public $cost = [];
+    public $totalCost = 0;
     public $detailId = [];
     public $assignTo;
     public $attachments = [];
@@ -72,6 +73,7 @@ class CreateRequestView extends Component
                     $this->cost[] = $detail->cost;
                     $this->detailId[] = $detail->id;
                 }
+                $this->totalCost = array_sum($this->cost);
             }
         } else {
             // Initialize with one empty row
@@ -88,7 +90,7 @@ class CreateRequestView extends Component
             ->whereHas('request_type_approver')
             ->get();
 
-        $userData = User::where('is_active', 1)->orderBy('firstname', 'asc')->get();
+        $userData = User::where('is_active', 1)->where('company_id', Auth::user()->company_id)->orderBy('firstname', 'asc')->get();
         return view('livewire.pages.request.create-request-view', compact('requestTypeData', 'userData'));
     }
 
@@ -196,8 +198,8 @@ class CreateRequestView extends Component
             }
 
             // update queries
-            $this->storeResource(RequestUpdateLog::class, $requestLogAttributes);
-            if ($this->requestData->status_id == 1) { //approve
+            RequestUpdateLog::create($requestLogAttributes);
+            if ($this->requestData->status_id == 2) { //approve
                 foreach ($this->details as $index => $detail) {
                     $this->updateResourceUsingId(RequestDetail::class, $this->detailId[$index], [
                         'cost' => $this->cost[$index]
@@ -233,5 +235,10 @@ class CreateRequestView extends Component
             'url'  => $url,
             'parameter' => $parameter
         ]);
+    }
+
+    public function updatedCost($value, $key)
+    {
+        $this->totalCost = array_sum($this->cost);
     }
 }
