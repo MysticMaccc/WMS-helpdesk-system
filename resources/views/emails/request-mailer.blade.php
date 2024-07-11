@@ -17,9 +17,17 @@
                 font-weight: 500;
                 color: #1f1f1f;
               ">
-                OTP Verification
+                Request Notification
             </h1>
-
+            <p
+                style="
+            margin: 0;
+            margin-top: 17px;
+            font-weight: 500;
+            letter-spacing: 0.56px;
+          ">
+                Hi,
+            </p>
             <p
                 style="
                 margin: 0;
@@ -27,20 +35,7 @@
                 font-weight: 500;
                 letter-spacing: 0.56px;
               ">
-                Welcome to COMPANY TEST. Please enter the code above on the verification page to complete the login
-                process, and do not share this OTP with anyone. OTP is valid for
-                <span style="font-weight: 600; color: #1f1f1f;">5 minutes</span>.
-            </p>
-            <p
-                style="
-                margin: 0;
-                margin-top: 60px;
-                font-size: 40px;
-                font-weight: 600;
-                letter-spacing: 25px;
-                color: #ba3d4f;
-              ">
-                {{ $otp }}
+                There is a new request awaiting your approval with reference # {{ $referenceNumber }}.
             </p>
         </div>
     </div>
