@@ -20,5 +20,4 @@ class RequestView extends Component
     {
         $this->actionMessage = false;
     }
-    
 }

@@ -36,7 +36,7 @@ class LogIn extends Component
             $user = Auth::user();
             // Store authenticated user in session
             session(['Authenticated' => $user]);
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.index');
         } else {
             $this->addError('OTP', 'Invalid OTP.');
         }

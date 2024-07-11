@@ -7,7 +7,7 @@
             <x-slot:description>
                 {{ $description }}
                 @if ($hash != null)
-                    <p>Approver: {{ $nextStatusData->approver->full_name }}</p>
+                    {{ $nextStatusData != null ? '<p>Approver:' . $nextStatusData->approver->full_name . '</p>' : '' }}
                 @endif
             </x-slot:description>
 
@@ -35,7 +35,7 @@
                                     <td class="px-6 py-4 w-20">
                                         @if ($hash != null)
                                             <input type="text" class="py-1 w-20"
-                                                wire:model="cost.{{ $index }}">
+                                                wire:model.live="cost.{{ $index }}">
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">
@@ -47,6 +47,17 @@
                                     </td>
                                 </x-static-tr>
                             @endforeach
+                            @if ($hash != null)
+                                <x-static-tr>
+                                    <td class="px-6 py-4 w-40 flex justify-end">
+                                        <p class="font-bold">TOTAL:</p>
+                                    </td>
+                                    <td class="px-6 py-4 w-20">
+                                        <p class="font-bold">{{ $totalCost }}</p>
+                                    </td>
+                                    <td class="px-6 py-4"></td>
+                                </x-static-tr>
+                            @endif
                         </x-slot:tbody>
                         <x-static-tr>
                             @if ($hash == null)

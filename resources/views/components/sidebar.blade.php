@@ -17,7 +17,7 @@
             <x-sidebar-link-item label="Home" route="dashboard" />
         </x-nested-sidebar-item> --}}
 
-        <x-sidebar-link-item icon="home" label="Dashboard" route="dashboard.index" />
+        <x-sidebar-link-item icon="home" label="Dashboard" :status="in_array($activeRoute, ['dashboard.index'])" route="dashboard.index" />
         <x-sidebar-link-item icon="edit3" label="Request List" :status="in_array($activeRoute, ['request.index'])" route="request.index" />
 
         <x-nested-sidebar-item label="Request Maintenance" :status="in_array($activeRoute, ['category.index', 'request-type.index', 'request-type-status.index'])">

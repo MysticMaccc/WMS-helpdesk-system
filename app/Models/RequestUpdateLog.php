@@ -34,11 +34,11 @@ class RequestUpdateLog extends Model
     // relationships
     public function request()
     {
-        return $this->belongsTo(Request::class,'request_id');
+        return $this->belongsTo(Request::class, 'request_id', 'id');
     }
 
     public function status()
     {
-        return $this->belongsTo(RequestTypeStatus::class,'status_id');
+        return $this->belongsTo(RequestTypeStatus::class, 'status_id');
     }
 }
