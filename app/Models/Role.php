@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
+    protected $fillable = ['hash', 'name', 'is_active', 'modified_by'];
 
     // relationships
     public function user_role()
