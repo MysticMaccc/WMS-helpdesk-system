@@ -19,7 +19,7 @@ export default {
         },
     },
 
-    plugins: [forms, typography, require('tailwindcss-animated')],
+    plugins: [forms, typography, require("tailwindcss-animated")],
 };
 
 const plugin = require("tailwindcss/plugin");
@@ -101,6 +101,7 @@ module.exports = {
         },
     },
     plugins: [
+        require("tailwindcss-animated"),
         forms,
         typography,
         require("@tailwindcss/forms"),

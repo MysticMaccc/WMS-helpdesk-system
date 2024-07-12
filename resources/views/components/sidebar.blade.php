@@ -1,6 +1,6 @@
 <nav class="side-nav hidden w-[80px] overflow-x-hidden pb-16 pr-5 md:block xl:w-[230px]">
     @php
-        $activeRoute = Route::currentRouteName();
+    $activeRoute = Route::currentRouteName();
     @endphp
 
     <a class="flex items-center pt-4 pl-5 intro-x" href="">
@@ -17,7 +17,7 @@
             <x-sidebar-link-item label="Home" route="dashboard" />
         </x-nested-sidebar-item> --}}
 
-        <x-sidebar-link-item icon="home" label="Dashboard" route="dashboard.index" />
+        <x-sidebar-link-item icon="home" label="Dashboard" :status="in_array($activeRoute, ['dashboard.index'])" route="dashboard.index" />
         <x-sidebar-link-item icon="edit3" label="Request List" :status="in_array($activeRoute, ['request.index'])" route="request.index" />
 
         <x-nested-sidebar-item label="Request Maintenance" :status="in_array($activeRoute, ['category.index', 'request-type.index', 'request-type-status.index'])">
@@ -44,8 +44,7 @@
 
             <x-sidebar-link-item icon="sliders" label="Department" route="department.index" :status="in_array($activeRoute, ['department.index'])" />
 
-            <x-sidebar-link-item icon="sliders" label="User Management" route="user-management.index"
-                :status="in_array($activeRoute, ['user-management.index'])" />
+            <x-sidebar-link-item icon="sliders" label="User Management" route="user-management.index" :status="in_array($activeRoute, ['user-management.index'])" />
 
             {{-- <x-sidebar-link-item icon="sliders" label="User Type Management" route="user-type.index"
                 :status="in_array($activeRoute, ['user-type.index'])" /> --}}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Components\Request\GenerateForm\GenerateRequestForm;
 use App\Livewire\Components\UserManagement\UserCrudComponent;
 use App\Livewire\Pages\Category\CategoryView;
 use App\Livewire\Pages\Category\CreateCategoryView;
@@ -53,6 +54,7 @@ Route::middleware(['auth:sanctum', 'WMSAuthentication'])->group(function () {
         Route::get('index', RequestView::class)->name('index');
         Route::get('create', CreateRequestView::class)->name('create');
         Route::get('edit/{hash}', CreateRequestView::class)->name('edit');
+        Route::get('generate-form/{hash}', [GenerateRequestForm::class, 'generateRequest'])->name('generate-form');
     });
 
     Route::prefix('position')->as('position.')->group(function () {
