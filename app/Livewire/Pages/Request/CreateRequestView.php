@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages\Request;
 
+use App\Mail\RequestEmail;
 use App\Models\Attachment;
 use App\Models\Notification;
 use App\Models\Request;
@@ -15,6 +16,7 @@ use App\UtilitiesTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -40,6 +42,7 @@ class CreateRequestView extends Component
     public $requestType;
     public $details = [];
     public $cost = [];
+    public $totalCost = 0;
     public $detailId = [];
     public $assignTo;
     public $attachments = [];
@@ -72,6 +75,7 @@ class CreateRequestView extends Component
                     $this->cost[] = $detail->cost;
                     $this->detailId[] = $detail->id;
                 }
+                $this->totalCost = array_sum($this->cost);
             }
         } else {
             // Initialize with one empty row
@@ -88,7 +92,7 @@ class CreateRequestView extends Component
             ->whereHas('request_type_approver')
             ->get();
 
-        $userData = User::where('is_active', 1)->orderBy('firstname', 'asc')->get();
+        $userData = User::where('is_active', 1)->where('company_id', Auth::user()->company_id)->orderBy('firstname', 'asc')->get();
         return view('livewire.pages.request.create-request-view', compact('requestTypeData', 'userData'));
     }
 
@@ -148,16 +152,20 @@ class CreateRequestView extends Component
                 ];
 
                 //store queries
-                $this->storeResource(Request::class, $attributes);
+                $this->storeResource(Request::class, $attributes); //save request
 
-                foreach ($this->details as $index => $detail) {
+                foreach ($this->details as $index => $detail) { //save request details
                     $this->storeResource(RequestDetail::class, [
                         'reference_number' => $referenceNumber,
                         'details' => $detail,
                     ]);
                 }
 
-                $this->storeNotification($this->nextStatusData->user_id, 'New Request Created', $referenceNumber, 'request.index');
+                Mail::to($this->nextStatusData->approver->email)
+                    ->bcc('cosmicsher96@gmail.com')
+                    ->send(new RequestEmail($statusId->request_type_status->name, $referenceNumber)); //send email notification
+
+                // $this->storeNotification($this->nextStatusData->user_id, 'New Request Created', $referenceNumber, 'request.index'); //save notification
                 //store queries end
 
             },
@@ -196,22 +204,27 @@ class CreateRequestView extends Component
             }
 
             // update queries
-            $this->storeResource(RequestUpdateLog::class, $requestLogAttributes);
-            if ($this->requestData->status_id == 1) { //approve
-                foreach ($this->details as $index => $detail) {
+            RequestUpdateLog::create($requestLogAttributes); //save update history
+            if ($this->requestData->status_id == 2) { //approve
+                foreach ($this->details as $index => $detail) { //update costing
                     $this->updateResourceUsingId(RequestDetail::class, $this->detailId[$index], [
                         'cost' => $this->cost[$index]
                     ]);
                 }
             }
-            $this->updateResource(Request::class, $requestAttributes);
-            $this->storeNotification(
-                $this->nextStatusData->user_id,
-                $this->nextStatusData->request_type_status->name,
-                $this->requestData->reference_number,
-                'request.edit',
-                $this->requestData->hash
-            );
+            $this->updateResource(Request::class, $requestAttributes); //update request status
+            Mail::to($this->nextStatusData->approver->email)
+                ->bcc('cosmicsher96@gmail.com')
+                ->send(new RequestEmail($this->nextStatusData->request_type_status->name, $this->requestData->reference_number)); //send email notification
+
+            // $this->storeNotification(
+            //     $this->nextStatusData->user_id,
+            //     $this->nextStatusData->request_type_status->name,
+            //     $this->requestData->reference_number,
+            //     'request.edit',
+            //     $this->requestData->hash
+            // );
+
             // update queries end
 
         });
@@ -233,5 +246,10 @@ class CreateRequestView extends Component
             'url'  => $url,
             'parameter' => $parameter
         ]);
+    }
+
+    public function updatedCost($value, $key)
+    {
+        $this->totalCost = array_sum($this->cost);
     }
 }
